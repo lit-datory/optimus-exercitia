@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  backend:
+    container_name: optimus_exercitia_backend
+    build:
+      context: backend
+      dockerfile: Dockerfile.development
+    stdin_open: true
+    ports:
+      - 3100:3100
+      - 5555:5555
+    volumes:
+      - ./backend:/app
+
+  frontend:
+    container_name: optimus_exercitia_frontend
+    build:
+      context: frontend
+      dockerfile: Dockerfile.development
+    stdin_open: true
+    ports:
+      - 3000:3000
+      - 3010:3010
+    volumes:
+      - ./frontend:/app
+
+  postgres:
+    container_name: optimus_exercitia_postgres
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=""
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+volumes:
+  postgres:

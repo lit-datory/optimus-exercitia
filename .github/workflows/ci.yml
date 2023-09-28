@@ -1,0 +1,96 @@
+name: Build and run tests
+
+on:
+  push:
+    branches:
+      - main
+      - "release/*"
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-backend:
+    runs-on: ubuntu-latest
+    container:
+      image: node:18-alpine
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v4
+      - name: npm install, build, and test
+        run: |
+          cd backend
+          npm install
+          npm run db:generate
+          npm run lint
+          npm run build
+          npm run db:migrate:prod
+          npm run test
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@postgres:5432/test?schema=public
+          JWT_SECRET_KEY: secret
+          JWT_ACCESS_TOKEN_EXPIRE_TIME: 300
+          JWT_REFRESH_TOKEN_EXPIRE_TIME: 604800
+          HTTP_COOKIE_EXPIRE_TIME: 604800
+          HTTP_COOKIE_DOMAIN: localhost
+          CSRF_TOKEN_SECRET_KEY: secret
+          FRONTEND_URL: http://localhost:3000
+
+  test-e2e:
+    runs-on: ubuntu-latest
+    container:
+      image: node:18-alpine
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v4
+      - name: npm install, build, and test
+        run: |
+          cd backend
+          npm install
+          npm run db:generate
+          npm run lint
+          npm run build
+          npm run db:migrate:prod
+          npm run test:e2e
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@postgres:5432/test?schema=public
+          JWT_SECRET_KEY: secret
+          JWT_ACCESS_TOKEN_EXPIRE_TIME: 300
+          JWT_REFRESH_TOKEN_EXPIRE_TIME: 604800
+          HTTP_COOKIE_EXPIRE_TIME: 604800
+          HTTP_COOKIE_DOMAIN: localhost
+          CSRF_TOKEN_SECRET_KEY: secret
+          FRONTEND_URL: ""
+
+  test-frontend:
+    runs-on: ubuntu-latest
+    container:
+      image: node:18-alpine
+    steps:
+      - uses: actions/checkout@v4
+      - name: npm install, build, and test
+        run: |
+          cd frontend
+          npm install
+          npm run lint
+          npm run tsc
+          npm run find:circular
+          npm test
+        env:
+          VITE_API_URL: http://localhost:3100

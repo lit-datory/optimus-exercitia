@@ -1,0 +1,56 @@
+{
+  "common": {
+    "locales": {
+      "en_GB": "Engels",
+      "nl_BE": "Nederlands"
+    },
+    "validations": {
+      "required": "Vereist",
+      "email": "Incorrect e-mail adres"
+    },
+    "inputFields": {
+      "email": {
+        "label": "E-mail"
+      },
+      "password": {
+        "label": "Wachtwoord"
+      }
+    }
+  },
+  "login": {
+    "headers": {
+      "title": "Log in met uw account"
+    },
+    "buttons": {
+      "signIn": "Log in"
+    },
+    "inputFields": {
+      "errors": {
+        "password": "Incorrect e-mail adres of wachtwoord"
+      }
+    }
+  },
+  "notFound": {
+    "headers": {
+      "title": "Pagina niet gevonden"
+    },
+    "description": "Sorry, we hebben de pagina niet gevonden.",
+    "link": "Ga terug naar de app",
+    "contactSupport": "Contacteer support"
+  },
+  "profile": {
+    "headers": {
+      "title": "Profiel",
+      "id": "ID",
+      "firstName": "Voornaam",
+      "lastName": "Achternaam",
+      "email": "E-mail",
+      "blocked": "Geblokeerd",
+      "createdAt": "Gecreëerd op",
+      "updatedAt": "Geüpdate op"
+    }
+  },
+  "language": {
+    "label": "Taal"
+  }
+}

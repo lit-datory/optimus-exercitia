@@ -1,0 +1,28 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LoginForm component > Sign in flow > Sets error when endpoint returns error 1`] = `
+<span
+  class="text-sm text-red-400"
+  data-testid="password-error"
+>
+  Wrong email or password
+</span>
+`;
+
+exports[`LoginForm component > Validations > Correctly validates email 1`] = `
+<span
+  class="text-sm text-red-400"
+  data-testid="email-error"
+>
+  Invalid email
+</span>
+`;
+
+exports[`LoginForm component > Validations > Correctly validates password is required 1`] = `
+<span
+  class="text-sm text-red-400"
+  data-testid="password-error"
+>
+  Required
+</span>
+`;
