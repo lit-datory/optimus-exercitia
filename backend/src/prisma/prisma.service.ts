@@ -1,6 +1,5 @@
 import { INestApplication, Injectable, OnModuleInit } from "@nestjs/common"
-import { PrismaClient } from "@prisma/client"
-import { LogLevel } from "@prisma/client/runtime/library"
+import { PrismaClient, Prisma } from "@prisma/client"
 import { ConfigService } from "src/config/services/config.service"
 
 type TableNameSelect = {
@@ -11,7 +10,7 @@ type TableNameSelect = {
 export class PrismaService extends PrismaClient implements OnModuleInit {
   constructor(protected readonly configService: ConfigService) {
     const logSql = configService.get("LOG_SQL")
-    const logDefinitions: LogLevel[] = logSql
+    const logDefinitions: Prisma.LogLevel[] = logSql
       ? ["query", "info", "warn", "error"]
       : ["info", "warn", "error"]
     super({
