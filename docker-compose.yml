@@ -27,7 +27,7 @@ services:
 
   postgres:
     container_name: optimus_exercitia_postgres
-    image: postgres:15-alpine
+    image: postgres:16-alpine
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
       - POSTGRES_USER=postgres
