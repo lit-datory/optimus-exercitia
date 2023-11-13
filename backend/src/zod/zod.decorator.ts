@@ -5,6 +5,7 @@ import { TransformInterceptor } from "./zod.interceptor"
 import { ZodValidationPipe } from "./zod.pipe"
 import { Schema } from "./zod.types"
 import { zodToJson } from "./zod.utils"
+import { SchemaObject } from "@nestjs/swagger/dist/interfaces/open-api-spec.interface"
 
 export function UseSchema(schema: Schema) {
   return applyDecorators(
@@ -18,16 +19,36 @@ export function UseSchema(schema: Schema) {
 
 function applyQueryDecorators({ query }: Schema) {
   if (!query) return []
-  if (!("shape" in query))
-    return [ApiQuery({ name: "query", schema: zodToJson(query) })]
+  const z = zodToJson(query)
 
-  const attributes = query.shape as Record<string, ZodSchema>
-  return Object.keys(attributes).map((attribute) => {
-    return ApiQuery({
-      name: attribute,
-      schema: zodToJson(attributes[attribute]),
-    })
-  })
+  const properties: SchemaObject | undefined = z.properties
+
+  if (!properties) return []
+
+  const requiredFields = z.required ?? []
+  return Object.entries(properties).map(
+    ([name, { type, description, items }]) => {
+      const isArray = type === "array"
+      const required = requiredFields.includes(name)
+
+      if (isArray) {
+        return ApiQuery({
+          name,
+          type,
+          schema: { type, items },
+          description,
+          required,
+        })
+      }
+
+      return ApiQuery({
+        name,
+        type,
+        description,
+        required,
+      })
+    },
+  )
 }
 
 function applyBodyDecorators({ body }: Schema) {
