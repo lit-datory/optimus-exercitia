@@ -26,29 +26,27 @@ function applyQueryDecorators({ query }: Schema) {
   if (!properties) return []
 
   const requiredFields = z.required ?? []
-  return Object.entries(properties).map(
-    ([name, { type, description, items }]) => {
-      const isArray = type === "array"
-      const required = requiredFields.includes(name)
+  return Object.entries(properties).map(([name, { type, items, ...rest }]) => {
+    const isArray = type === "array"
+    const required = requiredFields.includes(name)
 
-      if (isArray) {
-        return ApiQuery({
-          name,
-          type,
-          schema: { type, items },
-          description,
-          required,
-        })
-      }
-
+    if (isArray) {
       return ApiQuery({
         name,
         type,
-        description,
+        schema: { type, items },
         required,
+        ...rest,
       })
-    },
-  )
+    }
+
+    return ApiQuery({
+      name,
+      type,
+      required,
+      ...rest,
+    })
+  })
 }
 
 function applyBodyDecorators({ body }: Schema) {
