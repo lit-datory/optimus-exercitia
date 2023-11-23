@@ -16,7 +16,7 @@ Best practices in Latin.
 
 #### MacOS
 
-- Have atleast MacOS Monterey installed. This allows you to enable the new Virtualization framework which helps performance.
+- Have at least MacOS Monterey installed. This allows you to enable the new Virtualization framework which helps performance.
 - Make sure you have Docker installed with [docker desktop](https://www.docker.com/products/docker-desktop/).
 - Have [xcode](https://developer.apple.com/xcode/resources/) installed.
 

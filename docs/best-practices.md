@@ -18,7 +18,7 @@ It is recommended while working on this codebase that best practices are followe
 - Use camelCase for method names.
 - Use camelCase for properties and variables.
 - Controller names should be plural when possible.
-- Column names in the database should be snake_case. This avoids having to add quotes `(")` around them when querying with postgreSQL.
+- Column names in the database should be snake_case. This avoids having to add quotes `(")` around them when querying PostgreSQL.
 
 ### File names
 
@@ -36,13 +36,13 @@ It is recommended while working on this codebase that best practices are followe
 
 ## Endpoints
 - Every incoming request should be parsed ([Zod](https://zod.dev/)).
-- Every outging response should be parsed ([Zod](https://zod.dev/)).
+- Every outgoing response should be parsed ([Zod](https://zod.dev/)).
 - Endpoints should have correct swagger documentation by using ([Zod](https://zod.dev/)) schemas; this wil make the consumers of our endpoints api.
 - HTTP code 500 throws should never happen. Catch them!
 
 ## Types
 
-- Data coming from requests should be typed by a parsed output from ([Zod](https://zod.dev/)); this will make the typings throughout the codebase automatically correct.
+- Data coming from requests should be typed by a parsed output from ([Zod](https://zod.dev/)); this will make the typing throughout the codebase automatically correct.
 - Type files should end with `.type.ts`
 
 ## Tests (specs)

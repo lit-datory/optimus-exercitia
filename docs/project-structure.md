@@ -30,7 +30,7 @@ The **backend** code lives in the `backend` directory and looks like this:
         |
         test                # contains all end to end enpoint tests
 ```
-The frontend code lives in the `frontend` directory and its structure is mostily inspired from:
+The frontend code lives in the `frontend` directory and its structure is mostly inspired from:
 
 [Bulletproof React](https://github.com/alan2207/bulletproof-react)
 
