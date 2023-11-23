@@ -4,7 +4,7 @@ It is recommended while working on this codebase that best practices are followe
 
 ## General rules of thumb
 - Write code that is easy to delete, not to extend.
-- Avoid assigning variables with `let` and try to use higher order functions like `.map` and `.reduce` when operating data structures; this will prevent silent mutations of arrays and objects. Javascript's objects and therefore arrays are reference types. By creating new objects a lot of subtle bugs will be avoided.
+- Avoid assigning variables with `let` and try to use higher order functions like `.map` and `.reduce`, when operating data structures; this will prevent silent mutations. In JavaScript, objects, and therefore arrays, are reference types. Creating new objects can help avoid a lot of subtle bugs.
 - Write code that is testable. Testable code is often good code.
 
 ## Naming Conventions
