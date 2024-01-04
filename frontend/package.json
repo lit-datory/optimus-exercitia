@@ -18,7 +18,7 @@
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.1.1",
     "@hookform/resolvers": "^3.3.3",
-    "axios": "^1.6.3",
+    "axios": "^1.6.4",
     "classnames": "^2.5.1",
     "i18next": "^23.7.14",
     "jotai": "^2.6.1",
