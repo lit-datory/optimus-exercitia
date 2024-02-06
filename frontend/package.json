@@ -44,7 +44,7 @@
     "eslint-plugin-testing-library": "^6.2.0",
     "jsdom": "^24.0.0",
     "madge": "^6.1.0",
-    "postcss": "^8.4.33",
+    "postcss": "^8.4.34",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
     "tailwindcss": "^3.4.1",
