@@ -35,16 +35,16 @@ function applyQueryDecorators({ query }: Schema) {
         name,
         type,
         schema: { type, items },
-        required,
         ...rest,
+        required,
       })
     }
 
     return ApiQuery({
       name,
       type,
-      required,
       ...rest,
+      required,
     })
   })
 }
