@@ -1,4 +1,4 @@
-import * as cookieParser from "cookie-parser"
+import cookieParser from "cookie-parser"
 import { INestApplication, Provider } from "@nestjs/common"
 import { bootstrapTestModule } from "./bootstrapTestModule"
 
