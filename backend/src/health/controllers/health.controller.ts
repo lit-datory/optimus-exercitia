@@ -28,9 +28,10 @@ export class HealthController {
 
   private getChecks() {
     const frontendUrl = this.config.get("FRONTEND_URL")
+    const isTest = this.config.isTest()
     const checks = [() => this.db.isHealthy("database")]
 
-    if (frontendUrl) {
+    if (frontendUrl && !isTest) {
       return [...checks, () => this.http.pingCheck("frontend", frontendUrl)]
     }
 

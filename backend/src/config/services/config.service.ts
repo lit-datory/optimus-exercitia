@@ -9,4 +9,8 @@ export class ConfigService {
   public get<Key extends keyof Config>(key: Key) {
     return this.baseConfig.get(key) as Config[Key]
   }
+
+  public isTest() {
+    return process.env.NODE_ENV === "test"
+  }
 }
