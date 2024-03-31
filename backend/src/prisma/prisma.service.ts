@@ -24,22 +24,23 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
 
   public async $truncateAll(): Promise<void> {
     const tableNames = await this.$getTableNames()
-    for (const { tablename } of tableNames) {
-      if (tablename !== "_prisma_migrations") {
-        try {
-          await this.$executeRawUnsafe(
-            `TRUNCATE TABLE "public"."${tablename}" CASCADE;`,
-          )
-        } catch (error) {
-          console.error({ error })
-        }
-      }
+    const tables = tableNames.map((t) => `"public"."${t.tablename}"`)
+
+    try {
+      await this.$executeRawUnsafe(
+        `TRUNCATE TABLE ${tables.join(",")} CASCADE;`,
+      )
+    } catch (error) {
+      console.error({ error })
     }
   }
 
   public async $getTableNames(): Promise<TableNameSelect[]> {
     return await this.$queryRaw<TableNameSelect[]>`
-      SELECT tablename FROM pg_tables WHERE schemaname='public'
+      SELECT
+        tablename FROM pg_tables
+      WHERE schemaname='public'
+      AND pg_tables.tablename NOT IN ('_prisma_migrations')
     `
   }
 }
