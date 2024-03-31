@@ -11,7 +11,7 @@ up:
 	@docker compose up -d
 
 log:
-	@docker compose logs -f $(service)
+	@docker compose logs -f --tail 10000 $(service)
 
 build:
 	@docker compose build
