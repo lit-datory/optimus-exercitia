@@ -1,0 +1,35 @@
+name: Push to S3
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "branch or commit hash to base from"
+        default: "main"
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+         ref: ${{ github.event.inputs.ref }}
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+      - name: Build React App
+        run: |
+          cd frontend
+          npm install
+          npm run build
+        env:
+          VITE_API_URL: ${{ vars.API_URL }}
+      - name: Deploy app build to S3 bucket
+        run: aws s3 sync ./frontend/dist s3://optimus-exercitia --delete
+      - name: Invalidate cache
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/*"
+
