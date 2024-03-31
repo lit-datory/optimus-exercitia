@@ -12,6 +12,11 @@ export const configSchema = object({
   HTTP_COOKIE_EXPIRE_TIME: string().transform((v) => Number(v)),
   HTTP_COOKIE_DOMAIN: string(),
   CSRF_TOKEN_SECRET_KEY: string(),
+  ALLOWED_CORS_ORIGIN_URLS: string()
+    .optional()
+    .transform((value) => value && value.trim().split(","))
+    .pipe(z.string().url().array())
+    .optional(),
   LOG_SQL: z
     .enum(["true", "false"])
     .transform((v) => {

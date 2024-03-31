@@ -10,6 +10,10 @@ async function bootstrap() {
   const app = await NestFactory.create(MainModule)
   const config = app.get(ConfigService)
 
+  const frontendUrl = config.get("FRONTEND_URL")
+  const allowedCorsOriginUrls = config.get("ALLOWED_CORS_ORIGIN_URLS") ?? []
+  const corsWhitelist = [frontendUrl, ...allowedCorsOriginUrls]
+
   await swagger(app)
 
   interceptors(app)
@@ -18,7 +22,7 @@ async function bootstrap() {
   app.use(helmet())
   app.enableCors({
     credentials: true,
-    origin: config.get("FRONTEND_URL"),
+    origin: corsWhitelist,
   })
 
   app.enableShutdownHooks()
