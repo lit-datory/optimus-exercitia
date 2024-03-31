@@ -2,7 +2,7 @@ import { object, string, z } from "zod"
 
 export const configSchema = object({
   DATABASE_URL: string(),
-  FRONTEND_URL: string().optional(),
+  FRONTEND_URL: string().url(),
   SWAGGER_TITLE: string().default(""),
   SWAGGER_DESCRIPTION: string().default(""),
   SWAGGER_VERSION: string().default(""),

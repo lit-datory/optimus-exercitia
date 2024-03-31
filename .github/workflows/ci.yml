@@ -76,7 +76,7 @@ jobs:
           HTTP_COOKIE_EXPIRE_TIME: 604800
           HTTP_COOKIE_DOMAIN: localhost
           CSRF_TOKEN_SECRET_KEY: secret
-          FRONTEND_URL: ""
+          FRONTEND_URL: http://localhost:3000
 
   test-frontend:
     runs-on: ubuntu-latest
