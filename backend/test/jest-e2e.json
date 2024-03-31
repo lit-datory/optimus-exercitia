@@ -1,4 +1,5 @@
 {
+  "workerIdleMemoryLimit": "4096MB",
   "moduleFileExtensions": ["js", "json", "ts", "tsx", "jsx"],
   "rootDir": ".",
   "testEnvironment": "node",

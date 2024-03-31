@@ -87,6 +87,7 @@
     "typescript": "^5.4.3"
   },
   "jest": {
+    "workerIdleMemoryLimit": "4096MB",
     "moduleNameMapper": {
       "^src/(.*)$": "<rootDir>/$1"
     },
