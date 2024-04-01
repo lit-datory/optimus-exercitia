@@ -8,7 +8,9 @@ export class BuildCsrfCookieService {
   public execute(csrfToken: string): string {
     const cookieExpireTime = this.getCookieExpireTime()
     const cookieDomain = this.configService.get("HTTP_COOKIE_DOMAIN")
-    return `_csrf=${csrfToken}; Secure; domain=${cookieDomain}; Path=/; SameSite=Strict; Max-Age=${cookieExpireTime}`
+    const cookieSameSite = this.configService.get("HTTP_COOKIE_SAME_SITE")
+
+    return `_csrf=${csrfToken}; Secure; domain=${cookieDomain}; Path=/; SameSite=${cookieSameSite}; Max-Age=${cookieExpireTime}`
   }
 
   private getCookieExpireTime(): number {

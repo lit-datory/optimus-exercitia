@@ -8,6 +8,8 @@ export class BuildRefreshTokenCookieService {
   public execute(refreshToken: string): string {
     const cookieExpireTime = this.configService.get("HTTP_COOKIE_EXPIRE_TIME")
     const cookieDomain = this.configService.get("HTTP_COOKIE_DOMAIN")
-    return `refreshToken=${refreshToken}; HttpOnly; Secure; domain=${cookieDomain}; Path=/; SameSite=Strict; Max-Age=${cookieExpireTime}`
+    const cookieSameSite = this.configService.get("HTTP_COOKIE_SAME_SITE")
+
+    return `refreshToken=${refreshToken}; HttpOnly; Secure; domain=${cookieDomain}; Path=/; SameSite=${cookieSameSite}; Max-Age=${cookieExpireTime}`
   }
 }

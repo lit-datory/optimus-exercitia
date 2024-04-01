@@ -108,6 +108,7 @@ see `Makefile`, but here is a comprehensive list:
         JWT_REFRESH_TOKEN_EXPIRE_TIME=#Expiration time in seconds of the refresh token. For example, 604800 is 7 days.
         HTTP_COOKIE_EXPIRE_TIME=#Expiration time in seconds of the http cookies (_csrf, refreshToken). Most of the time this should be the same as the JWT_REFRESH_TOKEN_EXPIRATION_TIME.
         HTTP_COOKIE_DOMAIN=#Defines the domain attribute of the http cookies (_csrf, refreshToken). More info -> https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#define_where_cookies_are_sent
+        HTTP_COOKIE_SAME_SITE=#Defines the SameSite attribute of the http cookies (_csrf, refreshToken). More info -> https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#samesitesamesite-value
         CSRF_TOKEN_SECRET_KEY=#Secret string used to sign CSRF token stored inside the _csrf cookie
         LOG_SQL=#Set to true or false to show SQL queries in log
 ```

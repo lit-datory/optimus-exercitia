@@ -11,6 +11,7 @@ export const configSchema = object({
   JWT_REFRESH_TOKEN_EXPIRE_TIME: string().transform((v) => Number(v)),
   HTTP_COOKIE_EXPIRE_TIME: string().transform((v) => Number(v)),
   HTTP_COOKIE_DOMAIN: string(),
+  HTTP_COOKIE_SAME_SITE: z.enum(["Strict", "Lax", "None"]),
   CSRF_TOKEN_SECRET_KEY: string(),
   ALLOWED_CORS_ORIGIN_URLS: string()
     .optional()
