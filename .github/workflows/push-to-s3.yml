@@ -29,7 +29,7 @@ jobs:
         env:
           VITE_API_URL: ${{ vars.API_URL }}
       - name: Deploy app build to S3 bucket
-        run: aws s3 sync ./frontend/dist s3://optimus-exercitia --delete
+        run: aws s3 sync ./frontend/dist s3://${{ secrets.AWS_S3_BUCKET }} --delete
       - name: Invalidate cache
         run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/*"
 
