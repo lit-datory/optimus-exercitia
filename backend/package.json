@@ -57,7 +57,7 @@
     "@faker-js/faker": "^8.4.1",
     "@nestjs/cli": "^10.3.2",
     "@nestjs/schematics": "^10.1.1",
-    "@nestjs/testing": "^10.3.7",
+    "@nestjs/testing": "^10.3.8",
     "@swc/cli": "^0.3.10",
     "@swc/core": "^1.4.16",
     "@swc/jest": "^0.2.36",
