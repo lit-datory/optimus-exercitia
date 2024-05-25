@@ -3,9 +3,10 @@ import { UsersController } from "./controllers/users.controller"
 import { ProfileController } from "./controllers/profile.controller"
 import { FindUserService } from "./services/findUser.service"
 import { CreateUserService } from "./services/createUser.service"
+import { LambdasController } from "./controllers/lambda.controller"
 
 @Module({
-  controllers: [UsersController, ProfileController],
+  controllers: [UsersController, ProfileController, LambdasController],
   providers: [CreateUserService, FindUserService],
   exports: [CreateUserService, FindUserService],
 })
