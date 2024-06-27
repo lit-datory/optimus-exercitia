@@ -15,7 +15,7 @@
     "find:circular": "madge --circular src/main.tsx"
   },
   "dependencies": {
-    "@headlessui/react": "^2.1.0",
+    "@headlessui/react": "^2.1.1",
     "@heroicons/react": "^2.1.4",
     "@hookform/resolvers": "^3.6.0",
     "axios": "^1.7.2",
