@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.1.2",
-    "@heroicons/react": "^2.1.4",
+    "@heroicons/react": "^2.1.5",
     "@hookform/resolvers": "^3.9.0",
     "axios": "^1.7.2",
     "classnames": "^2.5.1",
