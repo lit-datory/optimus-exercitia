@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig } from "axios"
+import axios, { AxiosError, AxiosHeaders, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios"
 import { mockRefreshToken } from "src/features/auth/api"
 import { requestInterceptor, responseErrorInterceptor } from "./interceptors"
 
@@ -33,10 +33,16 @@ describe("Interceptors", () => {
 
   describe("responseErrorInterceptor", () => {
     it("refreshes token when api responds with 401", async () => {
-      const m = vi.spyOn(axios, "request").mockImplementation(async (config: AxiosRequestConfig) => config)
+      const m = vi
+        .spyOn(axios, "request")
+        .mockImplementation(async <T = unknown, R = AxiosResponse<T>>(config: AxiosRequestConfig): Promise<R> => {
+          return {
+            headers: config.headers as AxiosHeaders,
+          } as R
+        })
       const mock = mockRefreshToken({ resolve: { accessToken: "test" } })
       await responseErrorInterceptor({ response: { status: 401 }, config: { headers: {} } } as AxiosError)
-      expect(m).toReturnWith({ headers: { Authorization: "Bearer test" } })
+      expect(m).toHaveResolvedWith({ headers: { Authorization: "Bearer test" } })
       expect(mock).toHaveBeenCalled()
     })
 
