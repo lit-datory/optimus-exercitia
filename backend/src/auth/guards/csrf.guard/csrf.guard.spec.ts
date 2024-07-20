@@ -40,7 +40,7 @@ describe("CsrfGuard", () => {
       }),
     } as unknown as ExecutionContext
 
-    expect(() => csrfGuard.canActivate(mockExecutionContext)).toThrowError(
+    expect(() => csrfGuard.canActivate(mockExecutionContext)).toThrow(
       new UnauthorizedException(),
     )
   })
@@ -56,7 +56,7 @@ describe("CsrfGuard", () => {
       }),
     } as unknown as ExecutionContext
 
-    expect(() => csrfGuard.canActivate(mockExecutionContext)).toThrowError(
+    expect(() => csrfGuard.canActivate(mockExecutionContext)).toThrow(
       new UnauthorizedException(),
     )
   })
@@ -72,7 +72,7 @@ describe("CsrfGuard", () => {
       }),
     } as unknown as ExecutionContext
 
-    expect(() => csrfGuard.canActivate(mockExecutionContext)).toThrowError(
+    expect(() => csrfGuard.canActivate(mockExecutionContext)).toThrow(
       new UnauthorizedException(),
     )
   })
@@ -89,7 +89,7 @@ describe("CsrfGuard", () => {
       }),
     } as unknown as ExecutionContext
 
-    expect(() => csrfGuard.canActivate(mockExecutionContext)).toThrowError(
+    expect(() => csrfGuard.canActivate(mockExecutionContext)).toThrow(
       new UnauthorizedException(),
     )
   })
@@ -105,7 +105,7 @@ describe("CsrfGuard", () => {
       }),
     } as unknown as ExecutionContext
 
-    expect(() => csrfGuard.canActivate(mockExecutionContext)).toThrowError(
+    expect(() => csrfGuard.canActivate(mockExecutionContext)).toThrow(
       new UnauthorizedException(),
     )
   })
@@ -120,7 +120,7 @@ describe("CsrfGuard", () => {
       }),
     } as unknown as ExecutionContext
 
-    expect(() => csrfGuard.canActivate(mockExecutionContext)).toThrowError(
+    expect(() => csrfGuard.canActivate(mockExecutionContext)).toThrow(
       new UnauthorizedException(),
     )
   })
@@ -135,7 +135,7 @@ describe("CsrfGuard", () => {
       }),
     } as unknown as ExecutionContext
 
-    expect(() => csrfGuard.canActivate(mockExecutionContext)).toThrowError(
+    expect(() => csrfGuard.canActivate(mockExecutionContext)).toThrow(
       new UnauthorizedException(),
     )
   })
@@ -147,7 +147,7 @@ describe("CsrfGuard", () => {
       }),
     } as unknown as ExecutionContext
 
-    expect(() => csrfGuard.canActivate(mockExecutionContext)).toThrowError(
+    expect(() => csrfGuard.canActivate(mockExecutionContext)).toThrow(
       new UnauthorizedException(),
     )
   })
