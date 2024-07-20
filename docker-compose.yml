@@ -35,5 +35,13 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
 
+  puppeteer-lambda:
+    container_name: optimus_exercitia_puppeteer-lambda
+    build:
+      context: lambda
+      dockerfile: Dockerfile
+    ports:
+      - 9000:8080
+
 volumes:
   postgres:
