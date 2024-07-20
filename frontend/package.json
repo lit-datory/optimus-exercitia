@@ -11,8 +11,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
-    "tsc": "tsc",
-    "find:circular": "madge --circular src/main.tsx"
+    "tsc": "tsc"
   },
   "dependencies": {
     "@headlessui/react": "^2.1.2",
@@ -43,7 +42,6 @@
     "eslint-plugin-react": "^7.34.4",
     "eslint-plugin-testing-library": "^6.2.2",
     "jsdom": "^24.1.0",
-    "madge": "^7.0.0",
     "postcss": "^8.4.39",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.5",

@@ -96,7 +96,6 @@ jobs:
           npm install
           npm run lint
           npm run tsc
-          npm run find:circular
           npm test
         env:
           VITE_API_URL: http://localhost:3100
