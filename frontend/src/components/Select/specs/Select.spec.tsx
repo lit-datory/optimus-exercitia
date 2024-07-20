@@ -9,13 +9,13 @@ const options = [
 
 describe("Select", () => {
   it("renders the label and selected value", () => {
-    render(<Select label="Test" options={options} value={options[0]} onChange={vi.fn} />)
+    render(<Select label="Test" options={options} value={options[0]} onChange={vi.fn()} />)
     expect(screen.getByText("Test")).toBeDefined()
     expect(screen.getByText("Option 1")).toBeDefined()
   })
 
   it("opens the dropdown when the button is clicked", async () => {
-    render(<Select label="Test" options={options} value={options[0]} onChange={vi.fn} />)
+    render(<Select label="Test" options={options} value={options[0]} onChange={vi.fn()} />)
 
     fireEvent.click(await screen.findByTestId("select-button"))
 
