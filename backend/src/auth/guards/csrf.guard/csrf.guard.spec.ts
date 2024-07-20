@@ -15,7 +15,7 @@ describe("CsrfGuard", () => {
     buildCsrfTokenService = await module.resolve(BuildCsrfTokenService)
   })
 
-  it("returns true", async () => {
+  it("returns true", () => {
     const csrfToken = buildCsrfTokenService.execute()
     const mockExecutionContext = {
       switchToHttp: jest.fn().mockReturnValue({
@@ -29,7 +29,7 @@ describe("CsrfGuard", () => {
     expect(csrfGuard.canActivate(mockExecutionContext)).toBeTruthy()
   })
 
-  it("throws UnauthorizedException - invalid token in _csrf cookie", async () => {
+  it("throws UnauthorizedException - invalid token in _csrf cookie", () => {
     const csrfToken = buildCsrfTokenService.execute()
     const mockExecutionContext = {
       switchToHttp: jest.fn().mockReturnValue({
@@ -45,7 +45,7 @@ describe("CsrfGuard", () => {
     )
   })
 
-  it("throws UnauthorizedException - invalid token in X-CSRF-TOKEN header", async () => {
+  it("throws UnauthorizedException - invalid token in X-CSRF-TOKEN header", () => {
     const csrfToken = buildCsrfTokenService.execute()
     const mockExecutionContext = {
       switchToHttp: jest.fn().mockReturnValue({
@@ -61,7 +61,7 @@ describe("CsrfGuard", () => {
     )
   })
 
-  it("throws UnauthorizedException - invalid token in _csrf cookie & X-CSRF-TOKEN header", async () => {
+  it("throws UnauthorizedException - invalid token in _csrf cookie & X-CSRF-TOKEN header", () => {
     const csrfToken = buildCsrfTokenService.execute()
     const mockExecutionContext = {
       switchToHttp: jest.fn().mockReturnValue({
@@ -77,7 +77,7 @@ describe("CsrfGuard", () => {
     )
   })
 
-  it("throws UnauthorizedException - csrf tokens are different", async () => {
+  it("throws UnauthorizedException - csrf tokens are different", () => {
     const csrfToken = buildCsrfTokenService.execute()
     const csrfToken2 = buildCsrfTokenService.execute()
     const mockExecutionContext = {
@@ -94,7 +94,7 @@ describe("CsrfGuard", () => {
     )
   })
 
-  it("throws UnauthorizedException - invalid token in x-csrf-token header", async () => {
+  it("throws UnauthorizedException - invalid token in x-csrf-token header", () => {
     const csrfToken = buildCsrfTokenService.execute()
     const mockExecutionContext = {
       switchToHttp: jest.fn().mockReturnValue({
@@ -110,7 +110,7 @@ describe("CsrfGuard", () => {
     )
   })
 
-  it("throws UnauthorizedException - _csrf cookie missing", async () => {
+  it("throws UnauthorizedException - _csrf cookie missing", () => {
     const csrfToken = buildCsrfTokenService.execute()
     const mockExecutionContext = {
       switchToHttp: jest.fn().mockReturnValue({
@@ -125,7 +125,7 @@ describe("CsrfGuard", () => {
     )
   })
 
-  it("throws UnauthorizedException - X-CSRF-TOKEN header missing", async () => {
+  it("throws UnauthorizedException - X-CSRF-TOKEN header missing", () => {
     const csrfToken = buildCsrfTokenService.execute()
     const mockExecutionContext = {
       switchToHttp: jest.fn().mockReturnValue({
@@ -140,7 +140,7 @@ describe("CsrfGuard", () => {
     )
   })
 
-  it("throws UnauthorizedException - X-CSRF-TOKEN header & _csrf cookie missing", async () => {
+  it("throws UnauthorizedException - X-CSRF-TOKEN header & _csrf cookie missing", () => {
     const mockExecutionContext = {
       switchToHttp: jest.fn().mockReturnValue({
         getRequest: jest.fn().mockReturnValue({}),

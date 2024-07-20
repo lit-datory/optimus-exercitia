@@ -2,7 +2,7 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger"
 import { INestApplication } from "@nestjs/common"
 import { ConfigService } from "src/config/services/config.service"
 
-export default async function swagger(app: INestApplication) {
+export default function swagger(app: INestApplication) {
   const configService = app.get(ConfigService)
 
   const title = configService.get("SWAGGER_TITLE")
