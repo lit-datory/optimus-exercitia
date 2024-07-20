@@ -14,7 +14,7 @@ async function bootstrap() {
   const allowedCorsOriginUrls = config.get("ALLOWED_CORS_ORIGIN_URLS") ?? []
   const corsWhitelist = [frontendUrl, ...allowedCorsOriginUrls]
 
-  await swagger(app)
+  swagger(app)
 
   interceptors(app)
 

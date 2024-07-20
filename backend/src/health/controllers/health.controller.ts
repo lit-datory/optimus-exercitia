@@ -21,18 +21,21 @@ export class HealthController {
   @ApiOperation({ description: "Pings frontend url & database" })
   @Get()
   @HealthCheck()
-  public index() {
+  public async index() {
     const checks = this.getChecks()
-    return this.health.check(checks)
+    return await this.health.check(checks)
   }
 
   private getChecks() {
     const frontendUrl = this.config.get("FRONTEND_URL")
     const isTest = this.config.isTest()
-    const checks = [() => this.db.isHealthy("database")]
+    const checks = [async () => await this.db.isHealthy("database")]
 
     if (frontendUrl && !isTest) {
-      return [...checks, () => this.http.pingCheck("frontend", frontendUrl)]
+      return [
+        ...checks,
+        async () => await this.http.pingCheck("frontend", frontendUrl),
+      ]
     }
 
     return checks

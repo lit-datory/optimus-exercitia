@@ -18,6 +18,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   public async validate(
     payload: AccessTokenPayload,
   ): Promise<CurrentAccessToken> {
-    return accessTokenSchema.parse(payload)
+    return await accessTokenSchema.parseAsync(payload)
   }
 }
