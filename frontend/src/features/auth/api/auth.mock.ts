@@ -10,7 +10,7 @@ type Data = {
 export const mockLogin = ({ resolve, reject }: Data) => {
   return vi.spyOn(auth, "login").mockReturnValue(
     new Promise((resolves, rejects) => {
-      if (resolve) return resolves(resolve as AuthResponse)
+      if (resolve) return resolves(resolve)
 
       if (reject) return rejects(reject)
     }),
@@ -28,7 +28,7 @@ export const mockLogout = () => {
 export const mockRefreshToken = ({ resolve, reject }: Data) => {
   return vi.spyOn(auth, "refreshToken").mockReturnValue(
     new Promise((resolves, rejects) => {
-      if (resolve) return resolves(resolve as AuthResponse)
+      if (resolve) return resolves(resolve)
 
       if (reject) return rejects(reject)
     }),
