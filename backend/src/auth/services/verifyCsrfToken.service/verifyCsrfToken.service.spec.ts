@@ -31,16 +31,16 @@ describe("VerifyCsrfTokenService", () => {
   })
 
   it("should fail validating the csrf token", () => {
-    expect(() =>
-      verifyCsrfTokenService.execute("sessionId.expiresIn"),
-    ).toThrowError(UnauthorizedException)
+    expect(() => verifyCsrfTokenService.execute("sessionId.expiresIn")).toThrow(
+      UnauthorizedException,
+    )
   })
 
   it("should fail validating the csrf token because it expired", () => {
     const expiresIn = Math.floor(Date.now() / 1000) - 1000
     expect(() =>
       verifyCsrfTokenService.execute(`sessionId.${expiresIn}.hash`),
-    ).toThrowError(UnauthorizedException)
+    ).toThrow(UnauthorizedException)
   })
 
   it("should fail verifying the csrf token because hash is invalid", () => {

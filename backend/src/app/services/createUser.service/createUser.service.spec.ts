@@ -27,7 +27,7 @@ describe("CreateUserService", () => {
   it("throws BadRequestException - user already exist", async () => {
     const { email } = await userFactory.create()
     const data = userFactory.build({ email })
-    await expect(createUserService.execute(data)).rejects.toThrowError(
+    await expect(createUserService.execute(data)).rejects.toThrow(
       BadRequestException,
     )
   })

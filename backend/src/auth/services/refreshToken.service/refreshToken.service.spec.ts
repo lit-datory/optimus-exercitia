@@ -41,7 +41,7 @@ describe("RefreshTokenService", () => {
         id,
         userAgent,
       }),
-    ).rejects.toThrowError(UnauthorizedException)
+    ).rejects.toThrow(UnauthorizedException)
   })
 
   it("throws UnauthorizedException - refresh token state is not found", async () => {
@@ -50,7 +50,7 @@ describe("RefreshTokenService", () => {
         id: randomUUID(),
         userAgent: "unknown",
       }),
-    ).rejects.toThrowError(UnauthorizedException)
+    ).rejects.toThrow(UnauthorizedException)
   })
   afterEach(async () => await prisma.$truncateAll())
   afterAll(async () => await prisma.$disconnect())

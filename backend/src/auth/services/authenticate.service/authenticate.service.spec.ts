@@ -35,7 +35,7 @@ describe("AuthenticateService", () => {
         email,
         password: "other",
       }),
-    ).rejects.toThrowError(UnauthorizedException)
+    ).rejects.toThrow(UnauthorizedException)
   })
 
   it("throws unauthorized exception when user is not found", async () => {
@@ -47,7 +47,7 @@ describe("AuthenticateService", () => {
         email: "random@email.com",
         password,
       }),
-    ).rejects.toThrowError(UnauthorizedException)
+    ).rejects.toThrow(UnauthorizedException)
   })
 
   it("throws unauthorized exception when user is blocked", async () => {
@@ -59,7 +59,7 @@ describe("AuthenticateService", () => {
         email,
         password,
       }),
-    ).rejects.toThrowError(UnauthorizedException)
+    ).rejects.toThrow(UnauthorizedException)
   })
 
   afterEach(async () => await prisma.$truncateAll())
