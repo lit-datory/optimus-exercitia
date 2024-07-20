@@ -8,7 +8,7 @@ export const LogoutRoute = () => {
   const logout = useSetAtom(logoutAtom)
 
   useEffect(() => {
-    ;(async () => {
+    void (async () => {
       await logout()
     })()
 

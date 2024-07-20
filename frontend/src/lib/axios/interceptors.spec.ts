@@ -15,7 +15,7 @@ vi.mock("jotai", async () => {
   }
 })
 
-vi.mock("src/routes", async () => {
+vi.mock("src/routes",  () => {
   return {
     router: {
       navigate: vi.fn(),
@@ -25,20 +25,20 @@ vi.mock("src/routes", async () => {
 
 describe("Interceptors", () => {
   describe("requestInterceptor", () => {
-    it("Sets Authorization header", async () => {
+    it("Sets Authorization header",  () => {
       const config = requestInterceptor({ headers: {} } as InternalAxiosRequestConfig)
       expect(config.headers.Authorization).toEqual("Bearer testToken")
     })
   })
 
   describe("responseErrorInterceptor", () => {
-    it("refreshes token when api responds with 401", async () => {
+    it("refreshes token when api responds with 401",  async () => {
       const m = vi
         .spyOn(axios, "request")
         .mockImplementation(async <T = unknown, R = AxiosResponse<T>>(config: AxiosRequestConfig): Promise<R> => {
-          return {
+          return await Promise.resolve({
             headers: config.headers as AxiosHeaders,
-          } as R
+          }) as R
         })
       const mock = mockRefreshToken({ resolve: { accessToken: "test" } })
       await responseErrorInterceptor({ response: { status: 401 }, config: { headers: {} } } as AxiosError)

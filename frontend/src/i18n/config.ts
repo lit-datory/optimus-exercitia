@@ -8,7 +8,7 @@ export enum Locales {
   NL_BE = "nl_BE",
 }
 
-i18n.use(initReactI18next).init({
+await i18n.use(initReactI18next).init({
   compatibilityJSON: "v3",
   returnNull: false,
   fallbackLng: Locales.EN_GB,
@@ -18,6 +18,6 @@ i18n.use(initReactI18next).init({
   },
 })
 
-i18n.changeLanguage(Locales.EN_GB)
+await i18n.changeLanguage(Locales.EN_GB)
 
 export default i18n

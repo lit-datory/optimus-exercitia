@@ -18,7 +18,7 @@ describe("Translations should be correct", () => {
     const keyOrder = deepCompareTranslations(en_GBTranslations, nl_BETranslations)
 
     if (keyOrder.length > 0) {
-      throw Error(`[${keyOrder}] are not in the same order as the in the english translations `)
+      throw Error(`[${keyOrder.join(",")}] are not in the same order as the in the english translations `)
     }
 
     expect(keyOrder.length).toBe(0)

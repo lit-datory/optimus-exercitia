@@ -14,8 +14,8 @@ export const LanguageSelect = () => {
 
   const [selected, setSelected] = useState(defaulLanguage)
 
-  const handleOnChange = (v: typeof defaulLanguage) => {
-    i18n.changeLanguage(v.value)
+  const handleOnChange = async (v: typeof defaulLanguage) => {
+    await i18n.changeLanguage(v.value)
     setSelected(v)
   }
 
