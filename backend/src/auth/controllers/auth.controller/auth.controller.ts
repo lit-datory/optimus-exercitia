@@ -98,7 +98,7 @@ export class AuthController {
     @Req()
     { cookies }: { cookies?: Record<string, string> },
     @Res({ passthrough: true }) res: Response,
-  ): Promise<string> {
+  ) {
     try {
       const refreshToken = this.getRefreshTokenFrom(cookies)
       if (refreshToken) {
@@ -108,12 +108,11 @@ export class AuthController {
         })
       }
     } catch (_) {
-    } finally {
-      const domain = this.configService.get("HTTP_COOKIE_DOMAIN")
-      res.clearCookie("refreshToken", { domain })
-      res.clearCookie("_csrf", { domain })
-      return "successfully logged out!"
+      this.clearCookies(res)
     }
+
+    this.clearCookies(res)
+    return "successfully logged out!"
   }
 
   @ApiOperation({
@@ -168,6 +167,12 @@ export class AuthController {
   ): string | undefined {
     if (!cookies) return undefined
     return cookies["refreshToken"]
+  }
+
+  private clearCookies(res: Response) {
+    const domain = this.configService.get("HTTP_COOKIE_DOMAIN")
+    res.clearCookie("refreshToken", { domain })
+    return res.clearCookie("_csrf", { domain })
   }
 
   private async verifyRefreshToken(refreshToken: string): Promise<string> {
