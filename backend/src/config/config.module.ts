@@ -7,7 +7,7 @@ import { ConfigService } from "./services/config.service"
   imports: [
     BaseConfigModule.forRoot({
       envFilePath: [`.env.${process.env.NODE_ENV ?? ""}`],
-      validate: (config: Record<string, any>) => {
+      validate: (config: Record<string, unknown>) => {
         return configSchema.parse(config)
       },
     }),

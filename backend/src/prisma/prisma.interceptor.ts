@@ -11,8 +11,8 @@ import { catchError, Observable } from "rxjs"
 export class PrismaInterceptor implements NestInterceptor {
   intercept(
     _: ExecutionContext,
-    next: CallHandler<any>,
-  ): Observable<any> | Promise<Observable<any>> {
+    next: CallHandler,
+  ): Observable<unknown> | Promise<Observable<unknown>> {
     return next.handle().pipe(
       catchError((error: Error & { code: string }) => {
         switch (error.code) {
