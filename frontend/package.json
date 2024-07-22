@@ -39,7 +39,7 @@
     "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-react": "^7.34.4",
+    "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-testing-library": "^6.2.2",
     "globals": "^15.8.0",
     "jsdom": "^24.1.0",
