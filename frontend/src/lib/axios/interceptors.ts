@@ -35,7 +35,7 @@ async function refresh(requestError: AxiosError) {
       config.headers.Authorization = `Bearer ${accessToken}`
       return axios.request(config)
     }
-  } catch (e) {
+  } catch {
     return router.navigate("/logout")
   }
 }

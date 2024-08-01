@@ -1,4 +1,4 @@
 import { input } from "zod"
-import { profileResponseSchema } from "../schemas"
+import { type profileResponseSchema } from "../schemas"
 
 export type ProfileResponse = input<typeof profileResponseSchema>
