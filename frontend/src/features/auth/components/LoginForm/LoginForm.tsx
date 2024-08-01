@@ -32,7 +32,7 @@ export const LoginForm = () => {
     try {
       await login(data)
       return navigate("/")
-    } catch (e: unknown) {
+    } catch {
       setError("password", {
         message: t("login.inputFields.errors.password"),
       })

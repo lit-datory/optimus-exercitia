@@ -4,7 +4,7 @@ import { AxiosResponse } from "axios"
 
 type Data = {
   resolve?: AuthResponse
-  reject?: unknown
+  reject?: string
 }
 
 export const mockLogin = ({ resolve, reject }: Data) => {
@@ -12,7 +12,7 @@ export const mockLogin = ({ resolve, reject }: Data) => {
     new Promise((resolves, rejects) => {
       if (resolve) return resolves(resolve)
 
-      if (reject) return rejects(reject)
+      if (reject) return rejects(new Error(reject))
     }),
   )
 }
@@ -30,7 +30,7 @@ export const mockRefreshToken = ({ resolve, reject }: Data) => {
     new Promise((resolves, rejects) => {
       if (resolve) return resolves(resolve)
 
-      if (reject) return rejects(reject)
+      if (reject) return rejects(new Error(reject))
     }),
   )
 }

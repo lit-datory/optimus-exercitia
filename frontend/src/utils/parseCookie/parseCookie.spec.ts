@@ -11,7 +11,6 @@ describe("parseCookie", () => {
     it("successfully parses the cookies to an object when the value has an '=' included", () => {
       const result = parseCookieToObject("_csrf=test=test")
       expect(result).toBeDefined()
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       expect(Object.values(result!)).toHaveLength(1)
       expect(result?._csrf).toBeDefined()
     })
@@ -19,7 +18,6 @@ describe("parseCookie", () => {
     it("successfully parses the cookies to an object when the value ends with an =", () => {
       const result = parseCookieToObject("_csrf=test=")
       expect(result).toBeDefined()
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       expect(Object.values(result!)).toHaveLength(1)
       expect(result?._csrf).toBeDefined()
       expect(result?._csrf).toEqual("test=")

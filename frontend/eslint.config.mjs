@@ -3,7 +3,6 @@
 import tseslint from "typescript-eslint"
 import eslint from "@eslint/js"
 import reactPlugin from "eslint-plugin-react"
-import globals from "globals"
 
 export default tseslint.config(
   eslint.configs.recommended,
@@ -15,32 +14,14 @@ export default tseslint.config(
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
-        project: ["./tsconfig.json", "./tsconfig.node.json"],
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
       },
     },
     rules: {
       "@typescript-eslint/no-misused-promises": ["error", { checksVoidReturn: false }],
     },
   },
-
-  {
-    files: ["**/*.{js,jsx,mjs,cjs,ts,tsx}"],
-    plugins: {
-      react: reactPlugin,
-    },
-    languageOptions: {
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
-      globals: {
-        ...globals.browser,
-      },
-    },
-    rules: {
-      ...reactPlugin.configs.recommended.rules,
-      ...reactPlugin.configs["jsx-runtime"].rules,
-    },
-  },
+  reactPlugin.configs.flat.recommended,
+  reactPlugin.configs.flat["jsx-runtime"]
 )

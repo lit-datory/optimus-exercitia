@@ -1,4 +1,4 @@
 import { input } from "zod"
-import { authResponseSchema } from "../schemas"
+import { type authResponseSchema } from "../schemas"
 
 export type AuthResponse = input<typeof authResponseSchema>

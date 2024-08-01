@@ -6,7 +6,7 @@ type Props = {
   error?: string
 } & React.InputHTMLAttributes<HTMLInputElement>
 
-export const InputField = forwardRef<HTMLInputElement, Props>(({ label, error, name, ...rest }, ref) => {
+export const InputField = forwardRef<HTMLInputElement, Props>(({ label, error, name, ...rest }: Props, ref) => {
   return (
     <div className="block">
       <label className="block text-sm font-semibold leading-6 text-gray-900">
