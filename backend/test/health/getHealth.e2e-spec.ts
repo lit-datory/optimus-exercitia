@@ -1,9 +1,9 @@
 import request from "supertest"
-import { INestApplication } from "@nestjs/common"
+import { NestExpressApplication } from "@nestjs/platform-express"
 import { bootstrapTestApp } from "src/utils/specs"
 
 describe("GET /health", () => {
-  let app: INestApplication
+  let app: NestExpressApplication
 
   beforeEach(async () => {
     app = await bootstrapTestApp()

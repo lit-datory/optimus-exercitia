@@ -1,11 +1,11 @@
 import request from "supertest"
-import { INestApplication } from "@nestjs/common"
+import { NestExpressApplication } from "@nestjs/platform-express"
 import { PrismaService } from "src/prisma"
 import { bootstrapTestApp } from "src/utils/specs"
 import { UserFactory } from "src/factories"
 
 describe("POST /users", () => {
-  let app: INestApplication
+  let app: NestExpressApplication
   let prisma: PrismaService
   let userFactory: UserFactory
 

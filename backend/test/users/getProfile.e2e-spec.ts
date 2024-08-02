@@ -1,5 +1,5 @@
 import request from "supertest"
-import { INestApplication } from "@nestjs/common"
+import { NestExpressApplication } from "@nestjs/platform-express"
 import { PrismaService } from "src/prisma"
 import { bootstrapTestApp } from "src/utils/specs"
 import { UserFactory } from "src/factories"
@@ -7,7 +7,7 @@ import { User } from "src/app"
 import { BuildAccessTokenService } from "src/auth/services/buildAccessToken.service"
 
 describe("GET /profile", () => {
-  let app: INestApplication
+  let app: NestExpressApplication
   let prisma: PrismaService
   let userFactory: UserFactory
   let buildAccessTokenService: BuildAccessTokenService

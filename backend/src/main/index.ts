@@ -5,9 +5,10 @@ import { MainModule } from "./main.module"
 import swagger from "./swagger"
 import { ConfigService } from "src/config/services/config.service"
 import interceptors from "./interceptors"
+import { NestExpressApplication } from "@nestjs/platform-express"
 
 async function bootstrap() {
-  const app = await NestFactory.create(MainModule)
+  const app = await NestFactory.create<NestExpressApplication>(MainModule)
   const config = app.get(ConfigService)
 
   const frontendUrl = config.get("FRONTEND_URL")

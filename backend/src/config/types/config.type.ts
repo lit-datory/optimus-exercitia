@@ -1,4 +1,4 @@
 import { output } from "zod"
-import { configSchema } from "../schemas"
+import { type configSchema } from "../schemas"
 
 export type Config = output<typeof configSchema>

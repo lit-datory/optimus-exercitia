@@ -1,5 +1,5 @@
 import request from "supertest"
-import { INestApplication } from "@nestjs/common"
+import { NestExpressApplication } from "@nestjs/platform-express"
 import { bootstrapTestApp } from "src/utils/specs"
 import { PrismaService } from "src/prisma"
 import { RefreshTokenStateFactory } from "src/factories"
@@ -10,7 +10,7 @@ import { BuildCsrfCookieService } from "src/auth/services/buildCsrfCookie.servic
 import { BuildCsrfTokenService } from "src/auth/services/buildCsrfToken.service"
 
 describe("POST /refresh_token", () => {
-  let app: INestApplication
+  let app: NestExpressApplication
   let prisma: PrismaService
   let refreshTokenStateFactory: RefreshTokenStateFactory
   let buildRefreshTokenService: BuildRefreshTokenService

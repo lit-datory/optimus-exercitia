@@ -6,8 +6,8 @@ import { Injectable } from "@nestjs/common"
 export class ConfigService {
   constructor(private baseConfig: BaseConfigService<Config, true>) {}
 
-  public get<Key extends keyof Config>(key: Key) {
-    return this.baseConfig.get(key) as Config[Key]
+  public get<Key extends keyof Config>(key: Key): Config[Key] {
+    return this.baseConfig.get(key)
   }
 
   public isTest() {

@@ -107,7 +107,7 @@ export class AuthController {
           id,
         })
       }
-    } catch (_) {
+    } catch {
       this.clearCookies(res)
     }
 
@@ -177,9 +177,11 @@ export class AuthController {
 
   private async verifyRefreshToken(refreshToken: string): Promise<string> {
     try {
-      const { sub } = await this.jwtService.verifyAsync(refreshToken)
+      const { sub } = await this.jwtService.verifyAsync<{ sub: string }>(
+        refreshToken,
+      )
       return sub
-    } catch (_) {
+    } catch {
       throw new UnauthorizedException()
     }
   }

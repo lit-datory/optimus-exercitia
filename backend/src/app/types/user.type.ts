@@ -1,4 +1,4 @@
 import { output } from "zod"
-import { userSchema } from "../schemas"
+import { type userSchema } from "../schemas"
 
 export type User = output<typeof userSchema>

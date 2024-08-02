@@ -18,7 +18,7 @@ export class ZodValidationPipe implements PipeTransform {
     return value
   }
 
-  private transformQuery(value: unknown) {
+  private transformQuery(value: unknown): unknown {
     if (!this.schema?.query) return value
 
     const result = this.schema.query.safeParse(value)
@@ -27,7 +27,7 @@ export class ZodValidationPipe implements PipeTransform {
     throw new BadRequestException([...result.error.issues])
   }
 
-  private transformParam(value: unknown) {
+  private transformParam(value: unknown): unknown  {
     if (!this.schema?.param) return value
 
     const result = this.schema.param.safeParse(value)
@@ -36,7 +36,7 @@ export class ZodValidationPipe implements PipeTransform {
     throw new BadRequestException([...result.error.issues])
   }
 
-  private transformBody(value: unknown) {
+  private transformBody(value: unknown): unknown  {
     if (!this.schema?.body) return value
 
     const result = this.schema.body.safeParse(value)
