@@ -16,5 +16,10 @@
     "noImplicitAny": true,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
-  }
+  },
+  "include": [
+    "src",
+    "test",
+    "eslint.config.mjs"
+  ]
 }

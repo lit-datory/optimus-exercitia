@@ -23,7 +23,7 @@ export class TransformInterceptor<T> implements NestInterceptor<T, Data<T>> {
   public intercept(
     context: ExecutionContext,
     next: CallHandler,
-  ): Observable<Data<T>> {
+  ): Observable<Data<T>> | Promise<Observable<Data<T>>> {
     const http = context.switchToHttp()
     const response = http.getResponse<Response>()
     if (response.statusCode !== this.statusCode) return next.handle()
@@ -32,8 +32,8 @@ export class TransformInterceptor<T> implements NestInterceptor<T, Data<T>> {
   }
 
   private transformResponse(data: unknown) {
-    const jsonReadyData = JSON.parse(JSON.stringify(data))
-    const result = this.schema.parse(jsonReadyData)
+    const jsonReadyData: unknown = JSON.parse(JSON.stringify(data))
+    const result: unknown = this.schema.parse(jsonReadyData)
     return result as Data<T>
   }
 }

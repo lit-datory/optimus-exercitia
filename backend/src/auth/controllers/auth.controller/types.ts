@@ -1,4 +1,5 @@
 import { output } from "zod"
-import { loginBodySchema } from "./schemas"
+import { type loginBodySchema, type authResponseSchema } from "./schemas"
 
 export type LoginBody = output<typeof loginBodySchema>
+export type AuthResponse = output<typeof authResponseSchema>

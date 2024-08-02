@@ -1,11 +1,12 @@
 import request from "supertest"
-import { INestApplication } from "@nestjs/common"
+import { NestExpressApplication } from "@nestjs/platform-express"
 import { PrismaService } from "src/prisma"
 import { bootstrapTestApp } from "src/utils/specs"
 import { UserFactory } from "src/factories"
+import { AuthResponse } from "src/auth/controllers/auth.controller/types"
 
 describe("POST /login", () => {
-  let app: INestApplication
+  let app: NestExpressApplication
   let prisma: PrismaService
   let userFactory: UserFactory
 
@@ -20,12 +21,15 @@ describe("POST /login", () => {
     const password = "test123"
     const { email } = await userFactory.create({ password })
 
-    const response = await request(app.getHttpServer())
+    const response: { body: unknown } = await request(app.getHttpServer())
       .post("/auth/login")
       .set("user-agent", "test")
       .send({ password, email })
       .expect(200)
-    expect(response.body.accessToken).toBeDefined()
+
+    expect(response.body).toMatchObject<AuthResponse>({
+      accessToken: expect.anything() as string,
+    })
   })
 
   it("returns 401 when password is wrong", async () => {

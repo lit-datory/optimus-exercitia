@@ -1,5 +1,11 @@
 import { applyDecorators, UseInterceptors, UsePipes } from "@nestjs/common"
-import { ApiBody, ApiParam, ApiQuery, ApiResponse } from "@nestjs/swagger"
+import {
+  ApiBody,
+  ApiParam,
+  ApiQuery,
+  ApiQueryOptions,
+  ApiResponse,
+} from "@nestjs/swagger"
 import { ZodSchema } from "zod"
 import { TransformInterceptor } from "./zod.interceptor"
 import { ZodValidationPipe } from "./zod.pipe"
@@ -21,32 +27,34 @@ function applyQueryDecorators({ query }: Schema) {
   if (!query) return []
   const z = zodToJson(query)
 
-  const properties: SchemaObject | undefined = z.properties
+  const properties = z.properties as Record<string, SchemaObject> | undefined
 
   if (!properties) return []
 
   const requiredFields = z.required ?? []
-  return Object.entries(properties).map(([name, { type, items, ...rest }]) => {
-    const isArray = type === "array"
-    const required = requiredFields.includes(name)
+  return Object.entries(properties).map(
+    ([name, { type, items, ...rest }]) => {
+      const isArray = type === "array"
+      const required = requiredFields.includes(name)
 
-    if (isArray) {
+      if (isArray) {
+        return ApiQuery({
+          name,
+          type,
+          schema: { type, items },
+          ...rest,
+          required,
+        } as ApiQueryOptions)
+      }
+
       return ApiQuery({
         name,
         type,
-        schema: { type, items },
         ...rest,
         required,
-      })
-    }
-
-    return ApiQuery({
-      name,
-      type,
-      ...rest,
-      required,
-    })
-  })
+      } as ApiQueryOptions)
+    },
+  )
 }
 
 function applyBodyDecorators({ body }: Schema) {
