@@ -23,6 +23,6 @@ describe("BuildAccessTokenService", () => {
     expect(accessToken).toBeDefined()
   })
 
-  afterEach(async () => await prisma.$truncateAll())
-  afterAll(async () => await prisma.$disconnect())
+  afterEach(async () => { await prisma.$truncateAll(); })
+  afterAll(async () => { await prisma.$disconnect(); })
 })

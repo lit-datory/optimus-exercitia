@@ -6,7 +6,7 @@ import reactPlugin from "eslint-plugin-react"
 
 export default tseslint.config(
   eslint.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
+  ...tseslint.configs.strictTypeChecked,
   {
     plugins: {
       "@typescript-eslint": tseslint.plugin,
@@ -20,6 +20,7 @@ export default tseslint.config(
     },
     rules: {
       "@typescript-eslint/no-misused-promises": ["error", { checksVoidReturn: false }],
+      "@typescript-eslint/promise-function-async": "error",
       "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
     },
   },

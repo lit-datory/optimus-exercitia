@@ -31,17 +31,12 @@ export const LoginForm = () => {
   const handleLogin = async (data: LoginFieldValues) => {
     try {
       await login(data)
-      return navigate("/")
+      navigate("/")
     } catch {
       setError("password", {
         message: t("login.inputFields.errors.password"),
       })
     }
-  }
-
-  const handleError = (message?: string) => {
-    if (!message) return
-    return t(message)
   }
 
   return (
@@ -51,7 +46,7 @@ export const LoginForm = () => {
         label={t("common.inputFields.email.label")}
         name="email"
         type="email"
-        error={handleError(errors.email?.message)}
+        error={t(errors.email?.message)}
         autoComplete="email"
       />
       <InputField
@@ -59,7 +54,7 @@ export const LoginForm = () => {
         label={t("common.inputFields.password.label")}
         name="password"
         type="password"
-        error={handleError(errors.password?.message)}
+        error={t(errors.password?.message)}
         autoComplete="current-password"
       />
       <Button data-testid="login-button" type="submit" variant="primary">

@@ -50,7 +50,7 @@ describe("CsrfGuard", () => {
     const mockExecutionContext = {
       switchToHttp: jest.fn().mockReturnValue({
         getRequest: jest.fn().mockReturnValue({
-          cookies: { _csrf: `${csrfToken}` },
+          cookies: { _csrf: csrfToken },
           headers: { "x-csrf-token": "invalid" },
         }),
       }),

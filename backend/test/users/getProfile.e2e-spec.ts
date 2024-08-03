@@ -49,6 +49,6 @@ describe("GET /profile", () => {
     expect(response.body).toBeDefined()
   })
 
-  afterEach(async () => await prisma.$truncateAll())
-  afterAll(async () => await app.close())
+  afterEach(async () => { await prisma.$truncateAll(); })
+  afterAll(async () => { await app.close(); })
 })

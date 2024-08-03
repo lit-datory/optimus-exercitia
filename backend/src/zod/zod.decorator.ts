@@ -80,7 +80,7 @@ function applyResponseDecorators({ response }: Schema) {
   if (!response) return []
 
   const statuses = Object.keys(response) as unknown as number[]
-  return statuses.reduce(
+  return statuses.reduce<Array<MethodDecorator | ClassDecorator>>(
     (decorators, status) => {
       const schema = response[status]
 
@@ -90,6 +90,6 @@ function applyResponseDecorators({ response }: Schema) {
         UseInterceptors(new TransformInterceptor(schema, Number(status))),
       ]
     },
-    [] as Array<MethodDecorator | ClassDecorator>,
+    [],
   )
 }

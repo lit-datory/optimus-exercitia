@@ -5,7 +5,7 @@ import eslint from "@eslint/js"
 
 export default tseslint.config(
   eslint.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
+  ...tseslint.configs.strictTypeChecked,
   {
     plugins: {
       "@typescript-eslint": tseslint.plugin,
@@ -18,20 +18,18 @@ export default tseslint.config(
       },
     },
     rules: {
-      "require-await": "off",
-      "@typescript-eslint/require-await": "error",
-      "no-return-await": "off",
-      "@typescript-eslint/return-await": ["error", "always"],
       "@typescript-eslint/no-misused-promises": [
         "error",
         { checksVoidReturn: false },
       ],
-      "@typescript-eslint/no-floating-promises": "error",
       "@typescript-eslint/promise-function-async": "error",
-      "@typescript-eslint/await-thenable": "error",
       "@typescript-eslint/no-unused-vars": [
         "error",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
+      "@typescript-eslint/no-extraneous-class": [
+        "error",
+        { allowWithDecorator: true },
       ],
     },
   },

@@ -18,7 +18,7 @@ export function responseInterceptor(response: AxiosResponse) {
 }
 
 export async function responseErrorInterceptor(error: AxiosError) {
-  if (error && error?.response?.status !== 401) return Promise.reject(error)
+  if (error.response?.status !== 401) return Promise.reject(error)
   return await refresh(error)
 }
 
@@ -33,7 +33,7 @@ async function refresh(requestError: AxiosError) {
     const { config } = requestError
     if (config) {
       config.headers.Authorization = `Bearer ${accessToken}`
-      return axios.request(config)
+      return await axios.request(config)
     }
   } catch {
     return router.navigate("/logout")

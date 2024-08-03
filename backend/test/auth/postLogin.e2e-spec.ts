@@ -61,6 +61,6 @@ describe("POST /login", () => {
       .expect(400)
   })
 
-  afterEach(async () => await prisma.$truncateAll())
-  afterAll(async () => await app.close())
+  afterEach(async () => { await prisma.$truncateAll(); })
+  afterAll(async () => { await app.close(); })
 })
