@@ -20,8 +20,9 @@ export default tseslint.config(
     },
     rules: {
       "@typescript-eslint/no-misused-promises": ["error", { checksVoidReturn: false }],
+      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
     },
   },
   reactPlugin.configs.flat.recommended,
-  reactPlugin.configs.flat["jsx-runtime"]
+  reactPlugin.configs.flat["jsx-runtime"],
 )
