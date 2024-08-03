@@ -13,7 +13,7 @@ export class BuildCsrfCookieService {
     return `_csrf=${csrfToken}; Secure; domain=${cookieDomain}; Path=/; SameSite=${cookieSameSite}; Max-Age=${cookieExpireTime}`
   }
 
-  private getCookieExpireTime(): number {
+  private getCookieExpireTime() {
     return this.configService.get("HTTP_COOKIE_EXPIRE_TIME")
   }
 }

@@ -28,7 +28,9 @@ export class ProfileController {
     },
   })
   @Get()
-  public async get(@Req() { user: currentUser }: { user: CurrentAccessToken }) {
+  public async get(
+    @Req() { user: currentUser }: { user: CurrentAccessToken | undefined },
+  ) {
     if (currentUser) {
       const user = await this.findUserService.execute({ id: currentUser.id })
       if (user) {

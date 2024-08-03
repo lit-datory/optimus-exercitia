@@ -32,6 +32,6 @@ describe("CreateUserService", () => {
     )
   })
 
-  afterEach(async () => await prisma.$truncateAll())
-  afterAll(async () => await prisma.$disconnect())
+  afterEach(async () => { await prisma.$truncateAll(); })
+  afterAll(async () => { await prisma.$disconnect(); })
 })

@@ -21,21 +21,27 @@ export class CsrfGuard implements CanActivate {
     const isVerified =
       this.verifyToken(csrfToken) && this.verifyToken(csrfTokenCookie)
     const isEqual = csrfToken === csrfTokenCookie
+
     if (!isVerified || !isEqual) throw new UnauthorizedException()
-    return isVerified && isEqual
+
+    return true
   }
 
   private getCsrfTokenFromCookie(request: Request): string | undefined {
-    const cookies: { _csrf?: string } = request.cookies as {
-      _csrf?: string
-    }
+    const cookies = request.cookies as
+      | {
+          _csrf?: string
+        }
+      | undefined
+
     if (cookies) return cookies["_csrf"]
   }
 
   private getCsrfTokenFromHeaders(request: Request): string | undefined {
-    const headers: { ["x-csrf-token"]?: string } = request.headers as {
+    const headers = request.headers as {
       ["x-csrf-token"]?: string
-    }
+    } | undefined
+
     if (headers) return headers["x-csrf-token"]
   }
 

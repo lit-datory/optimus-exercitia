@@ -14,5 +14,5 @@ describe("GET /health", () => {
     await request(app.getHttpServer()).get("/health").expect(200)
   })
 
-  afterAll(async () => await app.close())
+  afterAll(async () => { await app.close(); })
 })

@@ -37,7 +37,7 @@ describe("VerifyCsrfTokenService", () => {
   })
 
   it("should fail validating the csrf token because it expired", () => {
-    const expiresIn = Math.floor(Date.now() / 1000) - 1000
+    const expiresIn = (Math.floor(Date.now() / 1000) - 1000).toString()
     expect(() =>
       verifyCsrfTokenService.execute(`sessionId.${expiresIn}.hash`),
     ).toThrow(UnauthorizedException)
@@ -47,7 +47,7 @@ describe("VerifyCsrfTokenService", () => {
     const hmac = createHmac("sha256", "test")
     hmac.update("test")
     const hash = hmac.digest("base64")
-    const expiresIn = Math.floor(Date.now() / 1000) + 5000
+    const expiresIn = (Math.floor(Date.now() / 1000) + 5000).toString()
     const isVerified = verifyCsrfTokenService.execute(
       `sessionId.${expiresIn}.${hash}`,
     )

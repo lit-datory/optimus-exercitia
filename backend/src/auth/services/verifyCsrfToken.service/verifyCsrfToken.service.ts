@@ -22,7 +22,7 @@ export class VerifyCsrfTokenService {
 
   private createHmacHash(sessionId: string, expiresAt: number): string {
     const secret = this.configService.get("CSRF_TOKEN_SECRET_KEY")
-    const key = `${sessionId}.${expiresAt}`
+    const key = `${sessionId}.${expiresAt.toString()}`
     const hmac = createHmac("sha256", secret)
     hmac.update(key)
     return hmac.digest("base64")
