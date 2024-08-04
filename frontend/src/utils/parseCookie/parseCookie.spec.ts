@@ -11,14 +11,14 @@ describe("parseCookie", () => {
     it("successfully parses the cookies to an object when the value has an '=' included", () => {
       const result = parseCookieToObject("_csrf=test=test")
       expect(result).toBeDefined()
-      expect(Object.values(result!)).toHaveLength(1)
+      expect(result && Object.values(result)).toHaveLength(1)
       expect(result?._csrf).toBeDefined()
     })
 
     it("successfully parses the cookies to an object when the value ends with an =", () => {
       const result = parseCookieToObject("_csrf=test=")
       expect(result).toBeDefined()
-      expect(Object.values(result!)).toHaveLength(1)
+      expect(result && Object.values(result)).toHaveLength(1)
       expect(result?._csrf).toBeDefined()
       expect(result?._csrf).toEqual("test=")
     })

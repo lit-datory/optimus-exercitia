@@ -6,7 +6,7 @@ import reactPlugin from "eslint-plugin-react"
 
 export default tseslint.config(
   eslint.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
+  ...tseslint.configs.strictTypeChecked,
   {
     plugins: {
       "@typescript-eslint": tseslint.plugin,

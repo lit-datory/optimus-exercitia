@@ -5,7 +5,7 @@ export const LogoutButton = () => {
   const navigate = useNavigate()
 
   const handleOnLogout = () => {
-    return navigate("/logout")
+    navigate("/logout");
   }
   return (
     <Button onClick={handleOnLogout} variant="primary">

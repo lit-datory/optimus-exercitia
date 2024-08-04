@@ -3,6 +3,7 @@ import { Input } from "src/components/Input"
 
 type Props = {
   label: string
+  name: string
   error?: string
 } & React.InputHTMLAttributes<HTMLInputElement>
 

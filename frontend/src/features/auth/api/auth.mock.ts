@@ -10,9 +10,9 @@ type Data = {
 export const mockLogin = ({ resolve, reject }: Data) => {
   return vi.spyOn(auth, "login").mockReturnValue(
     new Promise((resolves, rejects) => {
-      if (resolve) return resolves(resolve)
+      if (resolve) { resolves(resolve); return; }
 
-      if (reject) return rejects(new Error(reject))
+      if (reject) { rejects(new Error(reject)); return; }
     }),
   )
 }
@@ -20,7 +20,7 @@ export const mockLogin = ({ resolve, reject }: Data) => {
 export const mockLogout = () => {
   return vi.spyOn(auth, "logout").mockReturnValue(
     new Promise((resolves) => {
-      return resolves("successfully logged out!" as unknown as AxiosResponse)
+      resolves("successfully logged out!" as unknown as AxiosResponse);
     }),
   )
 }
@@ -28,9 +28,9 @@ export const mockLogout = () => {
 export const mockRefreshToken = ({ resolve, reject }: Data) => {
   return vi.spyOn(auth, "refreshToken").mockReturnValue(
     new Promise((resolves, rejects) => {
-      if (resolve) return resolves(resolve)
+      if (resolve) { resolves(resolve); return; }
 
-      if (reject) return rejects(new Error(reject))
+      if (reject) { rejects(new Error(reject)); return; }
     }),
   )
 }
