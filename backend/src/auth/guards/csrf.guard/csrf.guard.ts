@@ -38,9 +38,11 @@ export class CsrfGuard implements CanActivate {
   }
 
   private getCsrfTokenFromHeaders(request: Request): string | undefined {
-    const headers = request.headers as {
-      ["x-csrf-token"]?: string
-    } | undefined
+    const headers = request.headers as
+      | {
+          ["x-csrf-token"]?: string
+        }
+      | undefined
 
     if (headers) return headers["x-csrf-token"]
   }

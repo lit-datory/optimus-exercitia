@@ -9,5 +9,7 @@ async function runWithDbConnection(func: Func): Promise<void> {
 }
 
 export function withDbConnection(func: Func): () => Promise<void> {
-  return async (): Promise<void> => { await runWithDbConnection(func); }
+  return async (): Promise<void> => {
+    await runWithDbConnection(func)
+  }
 }

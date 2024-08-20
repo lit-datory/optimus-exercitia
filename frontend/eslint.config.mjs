@@ -3,6 +3,7 @@
 import tseslint from "typescript-eslint"
 import eslint from "@eslint/js"
 import reactPlugin from "eslint-plugin-react"
+import eslintPrettierRecommended from "eslint-plugin-prettier/recommended"
 
 export default tseslint.config(
   eslint.configs.recommended,
@@ -26,4 +27,5 @@ export default tseslint.config(
   },
   reactPlugin.configs.flat.recommended,
   reactPlugin.configs.flat["jsx-runtime"],
+  eslintPrettierRecommended,
 )
