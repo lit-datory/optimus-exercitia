@@ -12,6 +12,11 @@ export default tseslint.config(
     plugins: {
       "@typescript-eslint": tseslint.plugin,
     },
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
