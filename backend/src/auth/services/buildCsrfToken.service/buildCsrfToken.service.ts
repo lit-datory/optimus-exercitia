@@ -9,12 +9,14 @@ export class BuildCsrfTokenService {
   public execute(): string {
     const sessionId = randomBytes(64).toString("hex")
     const cookieExpireTime = this.getCookieExpireTime()
-    const expiresAt = (Math.floor(Date.now() / 1000) + Number(cookieExpireTime)).toString()
+    const expiresAt = (
+      Math.floor(Date.now() / 1000) + Number(cookieExpireTime)
+    ).toString()
     const hash = this.createHmacHash(sessionId, expiresAt)
     return `${sessionId}.${expiresAt}.${hash}`
   }
 
-  private createHmacHash(sessionId: string, expiresAt:string): string {
+  private createHmacHash(sessionId: string, expiresAt: string): string {
     const secret = this.configService.get("CSRF_TOKEN_SECRET_KEY")
     const key = `${sessionId}.${expiresAt}`
     const hmac = createHmac("sha256", secret)
@@ -23,9 +25,7 @@ export class BuildCsrfTokenService {
   }
 
   private getCookieExpireTime() {
-    const cookieExpireTime = this.configService.get(
-      "HTTP_COOKIE_EXPIRE_TIME",
-    )
+    const cookieExpireTime = this.configService.get("HTTP_COOKIE_EXPIRE_TIME")
     return cookieExpireTime
   }
 }

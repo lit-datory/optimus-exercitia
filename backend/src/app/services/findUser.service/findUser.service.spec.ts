@@ -41,6 +41,10 @@ describe("FindUserService", () => {
     expect(user).toBeUndefined()
   })
 
-  afterEach(async () => { await prisma.$truncateAll(); })
-  afterAll(async () => { await prisma.$disconnect(); })
+  afterEach(async () => {
+    await prisma.$truncateAll()
+  })
+  afterAll(async () => {
+    await prisma.$disconnect()
+  })
 })

@@ -2,6 +2,7 @@
 
 import tseslint from "typescript-eslint"
 import eslint from "@eslint/js"
+import eslintPrettierRecommended from "eslint-plugin-prettier/recommended"
 
 export default tseslint.config(
   eslint.configs.recommended,
@@ -33,4 +34,6 @@ export default tseslint.config(
       ],
     },
   },
+  // @ts-expect-error: bug of typing in library?
+  eslintPrettierRecommended,
 )

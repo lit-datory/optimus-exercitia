@@ -7,7 +7,7 @@ export class CurrentUserGuard implements CanActivate {
   constructor(private findUserService: FindUserService) {}
 
   public async canActivate(context: ExecutionContext) {
-    const request = context.switchToHttp().getRequest<{ user: User}>()
+    const request = context.switchToHttp().getRequest<{ user: User }>()
     const { id } = request.user
     const currentUser = await this.getUser(id)
     if (!currentUser) return false
