@@ -41,7 +41,7 @@
     "@nestjs/platform-express": "^10.4.1",
     "@nestjs/swagger": "^7.4.0",
     "@nestjs/terminus": "^10.2.3",
-    "@prisma/client": "^5.18.0",
+    "@prisma/client": "^5.19.0",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "helmet": "^7.1.0",
