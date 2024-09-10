@@ -34,6 +34,5 @@ export default tseslint.config(
       ],
     },
   },
-  // @ts-expect-error: bug of typing in library?
   eslintPrettierRecommended,
 )
