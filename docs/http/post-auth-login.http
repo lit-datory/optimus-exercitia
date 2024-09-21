@@ -1,0 +1,13 @@
+POST {{BASE_URL}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{EMAIL}}",
+  "password": "{{PASSWORD}}"
+}
+
+# @lang=lua
+> {%
+local body = vim.json.decode(response.body)
+client.global.set("accessToken", body.accessToken)
+%}
