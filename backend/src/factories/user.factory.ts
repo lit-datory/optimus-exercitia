@@ -31,8 +31,8 @@ export class UserFactory extends BaseFactory<BuildAttr, CreateAttr> {
       id: faker.string.uuid(),
       email: faker.internet.email(),
       password: faker.internet.password({ length: 5 }),
-      firstName: faker.internet.userName(),
-      lastName: faker.internet.userName(),
+      firstName: faker.internet.username(),
+      lastName: faker.internet.username(),
       blocked: false,
     }
   }
