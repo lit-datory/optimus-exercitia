@@ -122,26 +122,27 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
     @Headers("user-agent") userAgent?: string,
   ) {
-    return await this.prisma.$transaction(
+    const existingRefreshToken = this.getRefreshTokenFrom(cookies)
+    if (!existingRefreshToken) throw new UnauthorizedException()
+
+    const id = await this.verifyRefreshToken(existingRefreshToken)
+
+    const { accessToken, refreshToken } = await this.prisma.$transaction(
       async (transaction: Prisma.TransactionClient) => {
-        const existingRefreshToken = this.getRefreshTokenFrom(cookies)
-        if (!existingRefreshToken) throw new UnauthorizedException()
-        const id = await this.verifyRefreshToken(existingRefreshToken)
-        const { accessToken, refreshToken } =
-          await this.refreshTokenService.execute(
-            {
-              id,
-              userAgent: userAgent ?? "unknown",
-            },
-            transaction,
-          )
-
-        const refreshTokenCookie = this.buildRefreshTokenCookie(refreshToken)
-
-        res.setHeader("Set-Cookie", [refreshTokenCookie])
-        return { accessToken }
+        return await this.refreshTokenService.execute(
+          {
+            id,
+            userAgent: userAgent ?? "unknown",
+          },
+          transaction,
+        )
       },
     )
+
+    const refreshTokenCookie = this.buildRefreshTokenCookie(refreshToken)
+
+    res.setHeader("Set-Cookie", [refreshTokenCookie])
+    return { accessToken }
   }
 
   private buildRefreshTokenCookie(refreshToken: string): string {
