@@ -34,11 +34,14 @@ Best practices in Latin.
 All the commands necessary to work with the containers are defined in the `Makefile`, so its not mandatory to know the Docker api by heart.
 
 - **Create the containers:**
-``` shell
+
+```shell
       make up
 ```
+
 - **Install node modules:**
-``` shell
+
+```shell
       make shell service=backend
       npm install
       exit
@@ -47,30 +50,39 @@ All the commands necessary to work with the containers are defined in the `Makef
       npm install
       exit
 ```
+
 - **Create `.env.development` and `.env.test` in `backend` based on `.env.default`** (See: [Env variables](#env-variables))
 - **Create `.env` file in frontend based on the `.env.default`**
 - **Optionally: create `scripts/env/dev.sh` and `scripts/env/prod.sh`.**
 - **Create db's:**
-``` shell
+
+```shell
       make shell service=backend
       npm run db:migrate:dev
       npm run db:migrate:test
       exit
 ```
+
 - **Restart all services**
-``` shell
+
+```shell
       make restart
 ```
+
 - **Show logs of services**
-``` shell
+
+```shell
       make log service=backend
       make log service=frontend
 ```
+
 - **Create a user:**
+
 ```ssh
     make shell service=backend
     npm run command:dev create-user -- --first-name "John" --last-name "Doe" --email "john.doe@email.com" --password "test123"
 ```
+
 - **Open your browser and visit** [http://localhost:3000](http://localhost:3000) **to access the frontend app**
 - **Open your browser and visit** [http://localhost:3100/swagger](http://localhost:3100/swagger) **to access the endpoint documentation**
 
@@ -81,6 +93,7 @@ All the commands necessary to work with the containers are defined in the `Makef
 ### Available commands
 
 see `Makefile`, but here is a comprehensive list:
+
 - `make start`: Starts the service, optionally can be passed specific service to start.
 - `make stop`: Stops the service, optionally can be passed specific service to stop.
 - `make restart`: Restarts the services, optionally can be passed specific service to restart.
@@ -97,7 +110,8 @@ see `Makefile`, but here is a comprehensive list:
 ## Env variables
 
 **Backend** uses these env variables
-``` sh
+
+```sh
         DATABASE_URL=#Database connection URL you probably want to have an other database url in `.env.test` more info -> https://www.prisma.io/docs/guides/development-environment/environment-variables#example-set-the-database_url-environment-variable-in-an-env-file
         FRONTEND_URL=#URL of frontend application eg. http://localhost:3000
         SWAGGER_TITLE=#Title of the swagger page
@@ -112,4 +126,5 @@ see `Makefile`, but here is a comprehensive list:
         HTTP_COOKIE_SAME_SITE=#Defines the SameSite attribute of the http cookies. More info -> https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#samesitesamesite-value
         LOG_SQL=#Set to true or false to show SQL queries in log
 ```
+
 See [Security](docs/security.md) for more info about how the env variables are used.

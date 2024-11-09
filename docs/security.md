@@ -30,6 +30,7 @@ These endpoints will always return a `401` when something goes wrong; this is a 
 - `/auth/logout` will always return 200 since you should always be able to logout and remove request cookies.
 
 ## Authorization
+
 - Endpoints that are protected should be authorized with the access token via the `Authorization` header and should be included as `Bearer <accessToken>`.
 - An access token can expire. Use `/auth/refresh_token` endpoint to retrieve a new one.
   - `/auth/refresh_token` will read the refresh token cookie value. The endpoint will return a new access token when a valid `refresh_token_state` in the database is present.
