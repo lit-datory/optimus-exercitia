@@ -46,7 +46,6 @@ jobs:
           HTTP_COOKIE_EXPIRE_TIME: 604800
           HTTP_COOKIE_DOMAIN: localhost
           HTTP_COOKIE_SAME_SITE: Strict
-          CSRF_TOKEN_SECRET_KEY: secret
           FRONTEND_URL: http://localhost:3000
 
   test-e2e:
@@ -81,7 +80,6 @@ jobs:
           HTTP_COOKIE_EXPIRE_TIME: 604800
           HTTP_COOKIE_DOMAIN: localhost
           HTTP_COOKIE_SAME_SITE: Strict
-          CSRF_TOKEN_SECRET_KEY: secret
           FRONTEND_URL: http://localhost:3000
 
   test-frontend:

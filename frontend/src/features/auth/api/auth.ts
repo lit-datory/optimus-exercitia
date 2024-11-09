@@ -1,6 +1,5 @@
 import { nonAuthorizedApi } from "src/lib/axios"
 import { HttpMethods } from "src/types"
-import { parseCookie } from "src/utils"
 import { authResponseSchema } from "../schemas"
 import { AuthResponse } from "../types"
 
@@ -18,9 +17,7 @@ export const logout = async () => {
 }
 
 export const refreshToken = async () => {
-  const csrfToken = parseCookie(document.cookie, "_csrf")
   const response = await nonAuthorizedApi<AuthResponse>("/auth/refresh_token", {
-    headers: { "X-CSRF-TOKEN": csrfToken },
     method: HttpMethods.POST,
     withCredentials: true,
   })
