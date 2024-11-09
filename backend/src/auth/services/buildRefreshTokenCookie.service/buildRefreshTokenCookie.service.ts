@@ -15,6 +15,7 @@ export class BuildRefreshTokenCookieService {
     const cookieExpireTime = this.configService.get("HTTP_COOKIE_EXPIRE_TIME")
     const cookieDomain = this.configService.get("HTTP_COOKIE_DOMAIN")
     const cookieSameSite = this.configService.get("HTTP_COOKIE_SAME_SITE")
+    const cookieSecure = this.configService.get("HTTP_COOKIE_SECURE")
 
     const cookieSettings = [
       `domain=${cookieDomain}`,
@@ -23,6 +24,8 @@ export class BuildRefreshTokenCookieService {
       `SameSite=${cookieSameSite}`,
       `Max-Age=${cookieExpireTime}`,
     ]
+
+    if (cookieSecure) cookieSettings.push("Secure")
 
     return cookieSettings.join("; ")
   }
