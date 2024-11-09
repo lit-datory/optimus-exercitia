@@ -1,7 +1,6 @@
 import {
   Controller,
   Post,
-  UseGuards,
   Req,
   Headers,
   Res,
@@ -9,7 +8,6 @@ import {
   Body,
   UnauthorizedException,
 } from "@nestjs/common"
-import { CsrfGuard } from "src/auth/guards"
 import { Response } from "express"
 import { badRequestSchema, unauthorizedSchema, UseSchema } from "src/zod"
 import {
@@ -20,8 +18,6 @@ import {
 import { BuildRefreshTokenService } from "src/auth/services/buildRefreshToken.service"
 import { CreateRefreshTokenStateService } from "src/auth/services/createRefreshTokenState.service"
 import { BuildRefreshTokenCookieService } from "src/auth/services/buildRefreshTokenCookie.service"
-import { BuildCsrfTokenService } from "src/auth/services/buildCsrfToken.service"
-import { BuildCsrfCookieService } from "src/auth/services/buildCsrfCookie.service"
 import { ApiOperation, ApiTags } from "@nestjs/swagger"
 import { JwtService } from "@nestjs/jwt"
 import { RefreshTokenService } from "src/auth/services/refreshToken.service/refreshToken.service"
@@ -41,8 +37,6 @@ export class AuthController {
     private buildRefreshTokenService: BuildRefreshTokenService,
     private createRefreshTokenStateService: CreateRefreshTokenStateService,
     private buildRefreshTokenCookieService: BuildRefreshTokenCookieService,
-    private buildCsrfTokenService: BuildCsrfTokenService,
-    private buildCsrfCookieService: BuildCsrfCookieService,
     private deleteRefreshTokenStateService: DeleteRefreshTokenStateService,
     private authenticateService: AuthenticateService,
     private jwtService: JwtService,
@@ -80,8 +74,7 @@ export class AuthController {
     const refreshToken =
       await this.buildRefreshTokenService.execute(refreshTokenState)
     const refreshTokenCookie = this.buildRefreshTokenCookie(refreshToken)
-    const csrfCookie = this.buildCsrfCookie()
-    res.setHeader("Set-Cookie", [refreshTokenCookie, csrfCookie])
+    res.setHeader("Set-Cookie", [refreshTokenCookie])
 
     return { accessToken }
   }
@@ -119,7 +112,6 @@ export class AuthController {
     description: "Refreshes access token",
   })
   @Post("refresh_token")
-  @UseGuards(CsrfGuard)
   @HttpCode(200)
   @UseSchema({
     response: { 401: unauthorizedSchema, 200: authResponseSchema },
@@ -145,9 +137,8 @@ export class AuthController {
           )
 
         const refreshTokenCookie = this.buildRefreshTokenCookie(refreshToken)
-        const csrfCookie = this.buildCsrfCookie()
 
-        res.setHeader("Set-Cookie", [refreshTokenCookie, csrfCookie])
+        res.setHeader("Set-Cookie", [refreshTokenCookie])
         return { accessToken }
       },
     )
@@ -155,11 +146,6 @@ export class AuthController {
 
   private buildRefreshTokenCookie(refreshToken: string): string {
     return this.buildRefreshTokenCookieService.execute(refreshToken)
-  }
-
-  private buildCsrfCookie(): string {
-    const csrfCookie = this.buildCsrfTokenService.execute()
-    return this.buildCsrfCookieService.execute(csrfCookie)
   }
 
   private getRefreshTokenFrom(
@@ -171,8 +157,7 @@ export class AuthController {
 
   private clearCookies(res: Response) {
     const domain = this.configService.get("HTTP_COOKIE_DOMAIN")
-    res.clearCookie("refreshToken", { domain })
-    return res.clearCookie("_csrf", { domain })
+    return res.clearCookie("refreshToken", { domain })
   }
 
   private async verifyRefreshToken(refreshToken: string): Promise<string> {

@@ -6,13 +6,9 @@ import { PassportModule } from "@nestjs/passport"
 import { AuthController } from "./controllers/auth.controller"
 import { DeleteRefreshTokenStateService } from "./services/deleteRefreshTokenState.service"
 import { ConfigService } from "../config/services/config.service"
-import { VerifyCsrfTokenService } from "./services/verifyCsrfToken.service"
-import { CsrfGuard } from "./guards"
 import { RefreshTokenService } from "./services/refreshToken.service/refreshToken.service"
 import { AuthenticateService } from "./services/authenticate.service"
-import { BuildCsrfCookieService } from "./services/buildCsrfCookie.service"
 import { BuildRefreshTokenCookieService } from "./services/buildRefreshTokenCookie.service"
-import { BuildCsrfTokenService } from "./services/buildCsrfToken.service"
 import { BuildRefreshTokenService } from "./services/buildRefreshToken.service"
 import { CreateRefreshTokenStateService } from "./services/createRefreshTokenState.service"
 import { BuildAccessTokenService } from "./services/buildAccessToken.service"
@@ -34,16 +30,12 @@ import { BuildAccessTokenService } from "./services/buildAccessToken.service"
   ],
   providers: [
     AuthenticateService,
-    BuildCsrfCookieService,
     BuildRefreshTokenCookieService,
-    BuildCsrfTokenService,
     BuildRefreshTokenService,
     CreateRefreshTokenStateService,
     BuildAccessTokenService,
     JwtStrategy,
-    CsrfGuard,
     DeleteRefreshTokenStateService,
-    VerifyCsrfTokenService,
     RefreshTokenService,
   ],
   controllers: [AuthController],
