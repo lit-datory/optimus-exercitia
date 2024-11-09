@@ -12,7 +12,7 @@ export class DeleteRefreshTokenStateService {
   ): Promise<void> {
     const { id } = params
     if (id) {
-      await prisma.refreshTokenState.delete({ where: { id } })
+      await prisma.refreshTokenState.deleteMany({ where: { id } })
     }
     return
   }

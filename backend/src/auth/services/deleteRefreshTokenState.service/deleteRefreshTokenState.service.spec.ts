@@ -3,6 +3,7 @@ import { RefreshTokenStateFactory } from "src/factories"
 import { PrismaService } from "src/prisma"
 import { bootstrapTestModule } from "src/utils/specs"
 import { DeleteRefreshTokenStateService } from "./deleteRefreshTokenState.service"
+import { randomUUID } from "crypto"
 
 describe("DeleteRefreshTokenStateService", () => {
   let module: TestingModule
@@ -30,6 +31,12 @@ describe("DeleteRefreshTokenStateService", () => {
       where: { id },
     })
     expect(refreshToken).toBeNull()
+  })
+
+  it("should not throw when refreshToken is not found", async () => {
+    await expect(
+      deleteRefreshTokenStateService.execute({ id: randomUUID() }),
+    ).resolves.toBeUndefined()
   })
 
   afterEach(async () => {
