@@ -17,6 +17,10 @@ export const configSchema = object({
   HTTP_COOKIE_EXPIRE_TIME: z.coerce.number().transform((v) => v.toString()),
   HTTP_COOKIE_DOMAIN: string(),
   HTTP_COOKIE_SAME_SITE: z.enum(["strict", "lax", "none"]),
+  HTTP_COOKIE_SECURE: z
+    .enum(["true", "false"])
+    .transform((v) => v === "true")
+    .pipe(z.boolean()),
   ALLOWED_CORS_ORIGIN_URLS: string()
     .optional()
     .transform((value) => value && value.trim().split(","))

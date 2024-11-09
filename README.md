@@ -124,6 +124,7 @@ see `Makefile`, but here is a comprehensive list:
         HTTP_COOKIE_EXPIRE_TIME=#Expiration time in seconds of the http cookies. Most of the time this should be the same as the JWT_REFRESH_TOKEN_EXPIRATION_TIME.
         HTTP_COOKIE_DOMAIN=#Defines the domain attribute of the http cookies. More info -> https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#define_where_cookies_are_sent
         HTTP_COOKIE_SAME_SITE=#Defines the SameSite attribute of the http cookies. More info -> https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#samesitesamesite-value
+        HTTP_COOKIE_SECURE=#Defines the Secure attribute of the http cookies. Some browsers (Safari) do not allow secure cookies when the domain is localhost. With this env variable set to false we can test locally.
         LOG_SQL=#Set to true or false to show SQL queries in log
 ```
 
