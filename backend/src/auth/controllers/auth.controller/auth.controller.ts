@@ -152,13 +152,16 @@ export class AuthController {
     cookies?: Record<string, string>,
   ): string | undefined {
     if (!cookies) return undefined
-    return cookies["refreshToken"]
+    const name = this.configService.get("HTTP_COOKIE_REFRESH_TOKEN_NAME")
+    return cookies[name]
   }
 
   private clearCookies(res: Response) {
+    const name = this.configService.get("HTTP_COOKIE_REFRESH_TOKEN_NAME")
     const domain = this.configService.get("HTTP_COOKIE_DOMAIN")
     const sameSite = this.configService.get("HTTP_COOKIE_SAME_SITE")
-    res.clearCookie("refreshToken", { domain, sameSite, secure: true })
+
+    res.clearCookie(name, { domain, sameSite, secure: true })
   }
 
   private async verifyRefreshToken(refreshToken: string): Promise<string> {

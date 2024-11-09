@@ -41,6 +41,7 @@ jobs:
         env:
           DATABASE_URL: postgresql://postgres:postgres@postgres:5432/test?schema=public
           JWT_SECRET_KEY: secret
+          HTTP_COOKIE_REFRESH_TOKEN_NAME: refreshToken
           JWT_ACCESS_TOKEN_EXPIRE_TIME: 300
           JWT_REFRESH_TOKEN_EXPIRE_TIME: 604800
           HTTP_COOKIE_EXPIRE_TIME: 604800
@@ -77,6 +78,7 @@ jobs:
           JWT_SECRET_KEY: secret
           JWT_ACCESS_TOKEN_EXPIRE_TIME: 300
           JWT_REFRESH_TOKEN_EXPIRE_TIME: 604800
+          HTTP_COOKIE_REFRESH_TOKEN_NAME: refreshToken
           HTTP_COOKIE_EXPIRE_TIME: 604800
           HTTP_COOKIE_DOMAIN: localhost
           HTTP_COOKIE_SAME_SITE: strict

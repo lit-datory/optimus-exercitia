@@ -9,7 +9,8 @@ export class BuildRefreshTokenCookieService {
     const cookieExpireTime = this.configService.get("HTTP_COOKIE_EXPIRE_TIME")
     const cookieDomain = this.configService.get("HTTP_COOKIE_DOMAIN")
     const cookieSameSite = this.configService.get("HTTP_COOKIE_SAME_SITE")
+    const name = this.configService.get("HTTP_COOKIE_REFRESH_TOKEN_NAME")
 
-    return `refreshToken=${refreshToken}; HttpOnly; Secure; domain=${cookieDomain}; Path=/; SameSite=${cookieSameSite}; Max-Age=${cookieExpireTime}`
+    return `${name}=${refreshToken}; HttpOnly; Secure; domain=${cookieDomain}; Path=/; SameSite=${cookieSameSite}; Max-Age=${cookieExpireTime}`
   }
 }
