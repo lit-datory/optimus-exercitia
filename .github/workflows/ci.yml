@@ -45,7 +45,7 @@ jobs:
           JWT_REFRESH_TOKEN_EXPIRE_TIME: 604800
           HTTP_COOKIE_EXPIRE_TIME: 604800
           HTTP_COOKIE_DOMAIN: localhost
-          HTTP_COOKIE_SAME_SITE: Strict
+          HTTP_COOKIE_SAME_SITE: strict
           FRONTEND_URL: http://localhost:3000
 
   test-e2e:
@@ -79,7 +79,7 @@ jobs:
           JWT_REFRESH_TOKEN_EXPIRE_TIME: 604800
           HTTP_COOKIE_EXPIRE_TIME: 604800
           HTTP_COOKIE_DOMAIN: localhost
-          HTTP_COOKIE_SAME_SITE: Strict
+          HTTP_COOKIE_SAME_SITE: strict
           FRONTEND_URL: http://localhost:3000
 
   test-frontend:
