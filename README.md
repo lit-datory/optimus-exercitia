@@ -106,9 +106,10 @@ see `Makefile`, but here is a comprehensive list:
         JWT_SECRET_KEY=#Secret string used to sign access and refresh token. Can be a random fixed uuid for deployed environments. For local development a readable string - like "secret" - should suffice.
         JWT_ACCESS_TOKEN_EXPIRE_TIME=#Expiration time in seconds of the access token. For example,  300s is 5 min.
         JWT_REFRESH_TOKEN_EXPIRE_TIME=#Expiration time in seconds of the refresh token. For example, 604800 is 7 days.
-        HTTP_COOKIE_EXPIRE_TIME=#Expiration time in seconds of the http cookies (refreshToken). Most of the time this should be the same as the JWT_REFRESH_TOKEN_EXPIRATION_TIME.
-        HTTP_COOKIE_DOMAIN=#Defines the domain attribute of the http cookies (refreshToken). More info -> https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#define_where_cookies_are_sent
-        HTTP_COOKIE_SAME_SITE=#Defines the SameSite attribute of the http cookies (refreshToken). More info -> https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#samesitesamesite-value
+        HTTP_COOKIE_REFRESH_TOKEN_NAME=#Name of the cookie that will hold the refresh token
+        HTTP_COOKIE_EXPIRE_TIME=#Expiration time in seconds of the http cookies. Most of the time this should be the same as the JWT_REFRESH_TOKEN_EXPIRATION_TIME.
+        HTTP_COOKIE_DOMAIN=#Defines the domain attribute of the http cookies. More info -> https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#define_where_cookies_are_sent
+        HTTP_COOKIE_SAME_SITE=#Defines the SameSite attribute of the http cookies. More info -> https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#samesitesamesite-value
         LOG_SQL=#Set to true or false to show SQL queries in log
 ```
 See [Security](docs/security.md) for more info about how the env variables are used.

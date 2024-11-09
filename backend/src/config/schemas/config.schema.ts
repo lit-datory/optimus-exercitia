@@ -13,6 +13,7 @@ export const configSchema = object({
   JWT_REFRESH_TOKEN_EXPIRE_TIME: z.coerce
     .number()
     .transform((v) => v.toString()),
+  HTTP_COOKIE_REFRESH_TOKEN_NAME: string(),
   HTTP_COOKIE_EXPIRE_TIME: z.coerce.number().transform((v) => v.toString()),
   HTTP_COOKIE_DOMAIN: string(),
   HTTP_COOKIE_SAME_SITE: z.enum(["strict", "lax", "none"]),
