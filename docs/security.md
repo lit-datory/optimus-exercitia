@@ -1,4 +1,5 @@
 # 👮 Security
+
 This project includes a basic login flow to expand further on in future projects.
 The `auth` module in the backend (`backend/src/auth`) exposes 3 endpoints:
 
@@ -13,7 +14,7 @@ These endpoints will always return a `401` when something goes wrong; this is a 
 - To authentication with the endpoint the `/auth/login` endpoint should be used with a JSON body of:
 
   ```json
-  { "email": "<email>", "password": "<password>"}
+  { "email": "<email>", "password": "<password>" }
   ```
 
 - Whenever a user is blocked the `/auth/login` endpoint will return a `401`.
