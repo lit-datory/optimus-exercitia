@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "composite": true,
-    "module": "nodenext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "strict": true,
     "allowSyntheticDefaultImports": true
   },
   "include": [
-    "vite.config.mts"
+    "vite.config.ts"
   ]
 }
