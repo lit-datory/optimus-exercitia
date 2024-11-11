@@ -24,7 +24,9 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
 
   public async $truncateAll(): Promise<void> {
     const tableNames = await this.$getTableNames()
-    const tables = tableNames.map((t) => `"public"."${t.tablename}"`)
+    const schema = this.getSchema()
+
+    const tables = tableNames.map((t) => `${schema}."${t.tablename}"`)
 
     try {
       await this.$executeRawUnsafe(
@@ -36,11 +38,21 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
   }
 
   public async $getTableNames(): Promise<TableNameSelect[]> {
+    const schema = this.getSchema()
+
     return await this.$queryRaw<TableNameSelect[]>`
       SELECT
         tablename FROM pg_tables
-      WHERE schemaname='public'
+      WHERE schemaname=${schema}
       AND pg_tables.tablename NOT IN ('_prisma_migrations')
     `
+  }
+
+  private getSchema() {
+    const schema = process.env.DATABASE_URL?.split("?schema=")[1]
+
+    if (!schema) throw new Error("schema not found")
+
+    return schema
   }
 }

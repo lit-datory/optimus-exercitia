@@ -1,5 +1,5 @@
 {
-  "workerIdleMemoryLimit": "4096MB",
+  "workerIdleMemoryLimit": "8196MB",
   "moduleFileExtensions": ["js", "json", "ts", "tsx", "jsx"],
   "rootDir": ".",
   "testEnvironment": "node",
@@ -7,6 +7,9 @@
   "moduleNameMapper": {
     "^src/(.*)$": "<rootDir>/../src/$1"
   },
+  "globalSetup": "../jest.global-setup.ts",
+  "globalTeardown": "../jest.global-teardown.ts",
+  "setupFilesAfterEnv": ["../jest.setup.ts"],
   "transform": {
     "^.+\\.(t|j)sx?$": [
       "@swc/jest",
