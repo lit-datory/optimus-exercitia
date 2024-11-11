@@ -36,10 +36,9 @@ jobs:
           npm run db:generate
           npm run lint
           npm run build
-          npm run db:migrate:prod
           npm run test
         env:
-          DATABASE_URL: postgresql://postgres:postgres@postgres:5432/test?schema=public
+          DATABASE_URL: postgresql://postgres:postgres@postgres:5432/test
           JWT_SECRET_KEY: secret
           HTTP_COOKIE_REFRESH_TOKEN_NAME: refreshToken
           JWT_ACCESS_TOKEN_EXPIRE_TIME: 300
@@ -72,10 +71,9 @@ jobs:
           npm run db:generate
           npm run lint
           npm run build
-          npm run db:migrate:prod
           npm run test:e2e
         env:
-          DATABASE_URL: postgresql://postgres:postgres@postgres:5432/test?schema=public
+          DATABASE_URL: postgresql://postgres:postgres@postgres:5432/test
           JWT_SECRET_KEY: secret
           JWT_ACCESS_TOKEN_EXPIRE_TIME: 300
           JWT_REFRESH_TOKEN_EXPIRE_TIME: 604800
