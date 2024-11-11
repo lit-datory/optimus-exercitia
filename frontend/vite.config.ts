@@ -6,6 +6,9 @@ import tsconfigPaths from "vite-tsconfig-paths"
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  build: {
+    target: "esnext",
+  },
   plugins: [react(), tsconfigPaths(), svgr()],
   test: {
     environment: "jsdom",
