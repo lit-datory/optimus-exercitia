@@ -14,31 +14,91 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  lint-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: backend/package-lock.json
+      - uses: actions/cache@v4
+        with:
+          path: "backend/node_modules"
+          key: ${{ runner.os }}-backend-node-modules-${{github.sha}}-${{ hashFiles('backend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-backend-node-modules-${{github.sha}}-${{ hashFiles('backend/package-lock.json') }}
+            ${{ runner.os }}-backend-node-modules-
+
+      - name: npm install, tsc, lint and build
+        run: |
+          cd backend
+          npm install
+          npm run db:generate
+          npm run tsc
+          npm run lint
+          npm run build
+
+  lint-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+      - uses: actions/cache@v4
+        with:
+          path: "frontend/node_modules"
+          key: ${{ runner.os }}-frontend-node-modules-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-frontend-node-modules-${{ hashFiles('frontend/package-lock.json') }}
+            ${{ runner.os }}-frontend-node-modules-
+
+      - name: npm tsc, lint and build
+        run: |
+          cd frontend
+          npm install
+          npm run tsc
+          npm run lint
+          npm run build
+
   test-backend:
     runs-on: ubuntu-latest
-    container:
-      image: node:20-alpine
+    needs: lint-backend
     services:
       postgres:
-        image: postgres:15-alpine
+        image: postgres:16-alpine
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: test
         ports:
           - 5432:5432
+
     steps:
       - uses: actions/checkout@v4
-      - name: npm install, build, and test
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: backend/package-lock.json
+      - uses: actions/cache/restore@v4
+        with:
+          path: "backend/node_modules"
+          key: ${{ runner.os }}-backend-node-modules-${{github.sha}}-${{ hashFiles('backend/package-lock.json') }}
+          fail-on-cache-miss: true
+
+      - name: npm test
         run: |
           cd backend
-          npm install
-          npm run db:generate
-          npm run lint
-          npm run build
           npm run test
         env:
-          DATABASE_URL: postgresql://postgres:postgres@postgres:5432/test
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test
           JWT_SECRET_KEY: secret
           HTTP_COOKIE_REFRESH_TOKEN_NAME: refreshToken
           JWT_ACCESS_TOKEN_EXPIRE_TIME: 300
@@ -51,8 +111,7 @@ jobs:
 
   test-e2e:
     runs-on: ubuntu-latest
-    container:
-      image: node:20-alpine
+    needs: lint-backend
     services:
       postgres:
         image: postgres:16-alpine
@@ -64,16 +123,23 @@ jobs:
           - 5432:5432
     steps:
       - uses: actions/checkout@v4
-      - name: npm install, build, and test
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: backend/package-lock.json
+      - uses: actions/cache/restore@v4
+        with:
+          path: "backend/node_modules"
+          key: ${{ runner.os }}-backend-node-modules-${{github.sha}}-${{ hashFiles('backend/package-lock.json') }}
+          fail-on-cache-miss: true
+
+      - name: "npm test:e2e"
         run: |
           cd backend
-          npm install
-          npm run db:generate
-          npm run lint
-          npm run build
           npm run test:e2e
         env:
-          DATABASE_URL: postgresql://postgres:postgres@postgres:5432/test
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test
           JWT_SECRET_KEY: secret
           JWT_ACCESS_TOKEN_EXPIRE_TIME: 300
           JWT_REFRESH_TOKEN_EXPIRE_TIME: 604800
@@ -86,16 +152,23 @@ jobs:
 
   test-frontend:
     runs-on: ubuntu-latest
-    container:
-      image: node:20-alpine
+    needs: lint-frontend
     steps:
       - uses: actions/checkout@v4
-      - name: npm install, build, and test
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+      - uses: actions/cache/restore@v4
+        with:
+          path: "frontend/node_modules"
+          key: ${{ runner.os }}-frontend-node-modules-${{ hashFiles('frontend/package-lock.json') }}
+          fail-on-cache-miss: true
+
+      - name: npm test
         run: |
           cd frontend
-          npm install
-          npm run lint
-          npm run tsc
           npm test
         env:
           VITE_API_URL: http://localhost:3100
