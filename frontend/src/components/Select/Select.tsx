@@ -21,7 +21,7 @@ export const Select = <T extends Option>({ label, options, value, onChange }: Pr
       <div className="relative mt-1">
         <ListboxButton
           data-testid="select-button"
-          className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6"
+          className="relative w-full cursor-default rounded-md bg-white py-1.5 pr-10 pl-3 text-left text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset focus:ring-2 focus:ring-indigo-500 focus:outline-none sm:text-sm sm:leading-6"
         >
           <span className="flex items-center">
             <span className="ml-3 block truncate">{value.label}</span>
@@ -33,13 +33,13 @@ export const Select = <T extends Option>({ label, options, value, onChange }: Pr
 
         <ListboxOptions
           transition
-          className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+          className="ring-opacity-5 absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black focus:outline-none sm:text-sm"
         >
           {options.map((option) => (
             <ListboxOption
               key={option.key}
               data-testid={`${option.value}-option`}
-              className="group relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 data-[focus]:bg-indigo-600 data-[focus]:text-white"
+              className="group relative cursor-default py-2 pr-9 pl-3 text-gray-900 select-none data-[focus]:bg-indigo-600 data-[focus]:text-white"
               value={option}
             >
               <>

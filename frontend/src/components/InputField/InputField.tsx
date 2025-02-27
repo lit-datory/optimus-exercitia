@@ -10,7 +10,7 @@ type Props = {
 export const InputField = forwardRef<HTMLInputElement, Props>(({ label, error, name, ...rest }: Props, ref) => {
   return (
     <div className="block">
-      <label className="block text-sm font-semibold leading-6 text-gray-900">
+      <label className="block text-sm leading-6 font-semibold text-gray-900">
         {label}
         <Input data-testid={`${name}-input`} ref={ref} name={name} {...rest} />
       </label>
