@@ -10,9 +10,8 @@ export const LogoutRoute = () => {
   useEffect(() => {
     void (async () => {
       await logout()
+      await navigate("/login", { replace: true })
     })()
-
-    navigate("/login", { replace: true })
   }, [])
 
   return null

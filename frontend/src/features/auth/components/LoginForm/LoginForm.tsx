@@ -31,7 +31,7 @@ export const LoginForm = () => {
   const handleLogin = async (data: LoginFieldValues) => {
     try {
       await login(data)
-      navigate("/")
+      await navigate("/")
     } catch {
       setError("password", {
         message: t("login.inputFields.errors.password"),

@@ -4,8 +4,8 @@ import { Button } from "src/components/Button"
 export const LogoutButton = () => {
   const navigate = useNavigate()
 
-  const handleOnLogout = () => {
-    navigate("/logout")
+  const handleOnLogout = async () => {
+    await navigate("/logout")
   }
   return (
     <Button onClick={handleOnLogout} variant="primary">
