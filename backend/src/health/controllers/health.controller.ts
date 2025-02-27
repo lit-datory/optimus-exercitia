@@ -4,9 +4,10 @@ import {
   HealthCheckService,
   HttpHealthIndicator,
   HealthCheck,
+  PrismaHealthIndicator,
 } from "@nestjs/terminus"
 import { ConfigService } from "src/config/services/config.service"
-import { PrismaHealthIndicator } from "../indicators"
+import { PrismaService } from "src/prisma/prisma.service"
 
 @ApiTags("Monitoring")
 @Controller("health")
@@ -16,6 +17,7 @@ export class HealthController {
     private health: HealthCheckService,
     private http: HttpHealthIndicator,
     private db: PrismaHealthIndicator,
+    private prisma: PrismaService,
   ) {}
 
   @ApiOperation({ description: "Pings frontend url & database" })
@@ -29,7 +31,9 @@ export class HealthController {
   private getChecks() {
     const frontendUrl = this.config.get("FRONTEND_URL")
     const isTest = this.config.isTest()
-    const checks = [async () => await this.db.isHealthy("database")]
+    const checks = [
+      async () => await this.db.pingCheck("database", this.prisma),
+    ]
 
     if (frontendUrl && !isTest) {
       return [
