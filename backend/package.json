@@ -54,7 +54,7 @@
     "zod-to-json-schema": "^3.24.3"
   },
   "devDependencies": {
-    "@eslint/js": "^9.19.0",
+    "@eslint/js": "^9.22.0",
     "@faker-js/faker": "^9.5.1",
     "@nestjs/cli": "^11.0.5",
     "@nestjs/schematics": "^11.0.2",
