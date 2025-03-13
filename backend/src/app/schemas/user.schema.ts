@@ -9,3 +9,9 @@ export const userSchema = object({
   createdAt: date(),
   email: string().email(),
 })
+
+export const userWithPasswordSchema = userSchema.and(
+  object({
+    password: string(),
+  }),
+)
