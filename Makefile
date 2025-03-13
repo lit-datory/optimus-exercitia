@@ -1,3 +1,5 @@
+include .env
+
 start:
 	@docker compose start $(service)
 
@@ -69,3 +71,6 @@ pg_get_remote_db:
 
 ssh:
 	@sh scripts/ssh_$(service).sh $(env)
+
+browse:
+	open http://localhost:$($(shell echo ${service}_PORT | tr '[:lower:]' '[:upper:]'))
