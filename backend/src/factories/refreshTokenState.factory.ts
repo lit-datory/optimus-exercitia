@@ -17,7 +17,7 @@ export class RefreshTokenStateFactory extends BaseFactory<
     protected readonly prisma: PrismaService,
     private userFactory: UserFactory,
   ) {
-    super(prisma)
+    super()
   }
 
   protected async save(data: BuildAttr): Promise<CreateAttr> {
