@@ -1,8 +1,4 @@
-import { PrismaService } from "src/prisma"
-
 export class BaseFactory<BuildAttributes, CreateAttributes> {
-  constructor(protected readonly prisma: PrismaService) {}
-
   public build(params: Partial<BuildAttributes> = {}): BuildAttributes {
     return { ...this.generate(), ...params }
   }

@@ -11,7 +11,7 @@ type CreateAttr = User
 @Injectable()
 export class UserFactory extends BaseFactory<BuildAttr, CreateAttr> {
   constructor(protected readonly prisma: PrismaService) {
-    super(prisma)
+    super()
   }
 
   protected async save(data: BuildAttr): Promise<CreateAttr> {
