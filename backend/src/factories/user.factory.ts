@@ -1,20 +1,17 @@
-import { BaseFactory } from "./base.factory"
 import { Injectable } from "@nestjs/common"
-import { Prisma, User } from "@prisma/client"
 import { PrismaService } from "src/prisma"
-import { faker } from "@faker-js/faker"
 import { hash } from "bcrypt"
-
-type BuildAttr = Prisma.UserUncheckedCreateInput
-type CreateAttr = User
+import { userWithPasswordSchema } from "src/app"
+import { z } from "zod"
+import createZodFactory from "src/zod/zod.factory"
 
 @Injectable()
-export class UserFactory extends BaseFactory<BuildAttr, CreateAttr> {
+export class UserFactory extends createZodFactory(userWithPasswordSchema) {
   constructor(protected readonly prisma: PrismaService) {
     super()
   }
 
-  protected async save(data: BuildAttr): Promise<CreateAttr> {
+  public async save(data: z.output<typeof userWithPasswordSchema>) {
     const user = await this.prisma.user.create({
       data: {
         ...data,
@@ -23,17 +20,6 @@ export class UserFactory extends BaseFactory<BuildAttr, CreateAttr> {
       },
     })
 
-    return user
-  }
-
-  protected generate(): BuildAttr {
-    return {
-      id: faker.string.uuid(),
-      email: faker.internet.email(),
-      password: faker.internet.password({ length: 5 }),
-      firstName: faker.internet.username(),
-      lastName: faker.internet.username(),
-      blocked: false,
-    }
+    return userWithPasswordSchema.parse(user)
   }
 }

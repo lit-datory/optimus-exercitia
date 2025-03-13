@@ -1,18 +1,15 @@
-import { BaseFactory } from "./base.factory"
 import { Injectable } from "@nestjs/common"
-import { Prisma, RefreshTokenState, User } from "@prisma/client"
+import { User } from "@prisma/client"
 import { PrismaService } from "src/prisma"
-import { faker } from "@faker-js/faker"
 import { UserFactory } from "./user.factory"
-
-type BuildAttr = Prisma.RefreshTokenStateUncheckedCreateInput
-type CreateAttr = RefreshTokenState
+import { refreshTokenSchema } from "src/app/schemas/refreshTokenSchema"
+import { z } from "zod"
+import createZodFactory from "src/zod/zod.factory"
 
 @Injectable()
-export class RefreshTokenStateFactory extends BaseFactory<
-  BuildAttr,
-  CreateAttr
-> {
+export class RefreshTokenStateFactory extends createZodFactory(
+  refreshTokenSchema,
+) {
   constructor(
     protected readonly prisma: PrismaService,
     private userFactory: UserFactory,
@@ -20,7 +17,7 @@ export class RefreshTokenStateFactory extends BaseFactory<
     super()
   }
 
-  protected async save(data: BuildAttr): Promise<CreateAttr> {
+  public async save(data: z.output<typeof refreshTokenSchema>) {
     await this.handleUser(data.userId)
     const refreshTokenState = await this.prisma.refreshTokenState.create({
       data: {
@@ -29,14 +26,6 @@ export class RefreshTokenStateFactory extends BaseFactory<
     })
 
     return refreshTokenState
-  }
-
-  protected generate(): BuildAttr {
-    return {
-      id: faker.string.uuid(),
-      userId: faker.string.uuid(),
-      userAgent: faker.internet.userAgent(),
-    }
   }
 
   private async handleUser(id: User["id"]) {
