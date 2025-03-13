@@ -1,0 +1,24 @@
+{
+  "name": "database",
+  "type": "module",
+  "main": "db.d.ts",
+  "scripts": {
+    "up": "dbmate up && npm run codegen",
+    "down": "dbmate down && npm run codegen",
+    "dump": "dbmate dump",
+    "load": "dbmate load",
+    "new": "dbmate new",
+    "drop": "dbmate drop",
+    "create": "dbmate create",
+    "status": "dbmate status",
+    "codegen": "kysely-codegen --camel-case --out-file=db.d.ts --exclude-pattern='public.schema_migrations'"
+  },
+  "dependencies": {
+    "dbmate": "^2.24.0"
+  },
+  "devDependencies": {
+    "kysely": "^0.27.5",
+    "kysely-codegen": "^0.17.0",
+    "pg": "^8.13.1"
+  }
+}

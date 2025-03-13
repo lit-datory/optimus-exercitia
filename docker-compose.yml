@@ -12,6 +12,7 @@ services:
       - ${PRISMA_STUDIO_PORT}:5555
     volumes:
       - ./backend:/backend
+      - ./database/db.d.ts:/database/db.d.ts
 
   frontend:
     container_name: ${APP_NAME}_frontend
@@ -26,6 +27,16 @@ services:
       - ${FRONTEND_PORT_HRM}:3010
     volumes:
       - ./frontend:/frontend
+
+  database:
+    container_name: ${APP_NAME}_database
+    build:
+      context: database
+      dockerfile: Dockerfile
+    environment:
+      - DATABASE_URL=postgres://${POSTGRES_USER}@postgres:5432/${POSTGRES_DATABASE}?sslmode=disable
+    volumes:
+      - ./database:/database
 
   postgres:
     container_name: ${APP_NAME}_postgres
