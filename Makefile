@@ -35,7 +35,7 @@ prisma-studio:
 	@docker compose exec backend sh -c "npm run db:studio"
 
 psql:
-	@docker compose exec postgres sh -c "su - postgres -c 'psql $(db)'"
+	@docker compose exec postgres sh -c "su - postgres -c 'psql $${db:-$(POSTGRES_DATABASE)}'"
 
 pg_dump_structure:
 	@docker compose exec postgres sh -c "su - postgres -c 'pg_dump --no-owner --schema-only $(db) > structure.sql'"
