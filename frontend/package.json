@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",
-    "@tailwindcss/vite": "^4.0.15",
+    "@tailwindcss/vite": "^4.0.17",
     "@testing-library/react": "^16.2.0",
     "@types/eslint__js": "^9.14.0",
     "@types/node": "^22.13.10",
