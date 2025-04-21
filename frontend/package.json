@@ -29,7 +29,7 @@
     "zod": "^3.24.3"
   },
   "devDependencies": {
-    "@eslint/js": "^9.24.0",
+    "@eslint/js": "^9.25.0",
     "@tailwindcss/vite": "^4.1.4",
     "@testing-library/react": "^16.3.0",
     "@types/node": "^22.14.1",
