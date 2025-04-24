@@ -60,7 +60,7 @@
     "@nestjs/schematics": "^11.0.5",
     "@nestjs/testing": "^11.1.0",
     "@swc/cli": "^0.6.0",
-    "@swc/core": "^1.11.21",
+    "@swc/core": "^1.11.22",
     "@swc/jest": "^0.2.38",
     "@types/bcrypt": "^5.0.2",
     "@types/cookie-parser": "^1.4.8",
