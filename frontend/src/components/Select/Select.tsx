@@ -12,9 +12,10 @@ type Props<T extends Option> = {
   options: T[]
   value: T
   onChange: (v: T) => void
+  unmount?: boolean
 }
 
-export const Select = <T extends Option>({ label, options, value, onChange }: Props<T>) => {
+export const Select = <T extends Option>({ label, options, value, unmount = true, onChange }: Props<T>) => {
   return (
     <Listbox value={value} onChange={onChange}>
       <Label className="block leading-6">{label}</Label>
@@ -32,7 +33,8 @@ export const Select = <T extends Option>({ label, options, value, onChange }: Pr
         </ListboxButton>
 
         <ListboxOptions
-          transition
+          unmount={unmount}
+          data-testid="listbox-options"
           className="ring-opacity-5 absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black focus:outline-none sm:text-sm"
         >
           {options.map((option) => (
