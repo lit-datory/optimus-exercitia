@@ -21,7 +21,13 @@ export const LanguageSelect = () => {
 
   return (
     <div className="mb-4 w-72">
-      <Select options={options} onChange={handleOnChange} value={selected} label={t("language.label")} />
+      <Select
+        unmount={false}
+        options={options}
+        onChange={handleOnChange}
+        value={selected}
+        label={t("language.label")}
+      />
     </div>
   )
 }

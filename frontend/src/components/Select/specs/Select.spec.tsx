@@ -15,18 +15,18 @@ describe("Select", () => {
   })
 
   it("opens the dropdown when the button is clicked", async () => {
-    render(<Select label="Test" options={options} value={options[0]} onChange={vi.fn()} />)
+    render(<Select unmount={false} label="Test" options={options} value={options[0]} onChange={vi.fn()} />)
 
     fireEvent.click(await screen.findByTestId("select-button"))
 
     await act(async () => {
-      expect(await screen.findByRole("listbox")).toBeDefined()
+      expect(await screen.findByTestId("listbox-options")).toBeDefined()
     })
   })
 
   it("calls the onChange callback when an option is selected", () => {
     const handleChange = vi.fn()
-    render(<Select label="Test" options={options} value={options[0]} onChange={handleChange} />)
+    render(<Select unmount={false} label="Test" options={options} value={options[0]} onChange={handleChange} />)
     fireEvent.click(screen.getByTestId("select-button"))
 
     fireEvent.click(screen.getByText("Option 2"))
