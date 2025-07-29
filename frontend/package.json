@@ -21,7 +21,7 @@
     "classnames": "^2.5.1",
     "i18next": "^25.3.2",
     "jotai": "^2.12.5",
-    "react": "^19.1.0",
+    "react": "^19.1.1",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.61.1",
     "react-i18next": "^15.6.1",
