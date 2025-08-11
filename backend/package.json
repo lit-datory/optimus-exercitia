@@ -71,7 +71,7 @@
     "@types/passport-local": "^1.0.38",
     "@types/supertest": "^6.0.3",
     "dotenv-cli": "^10.0.0",
-    "eslint": "^9.31.0",
+    "eslint": "^9.33.0",
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-config-prettier": "^10.1.8",
     "jest": "30.0.5",
