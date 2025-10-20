@@ -46,7 +46,7 @@
     "prettier-plugin-tailwindcss": "^0.7.1",
     "tailwindcss": "^4.1.14",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.41.0",
+    "typescript-eslint": "^8.46.1",
     "vite": "^7.1.10",
     "vite-plugin-svgr": "^4.5.0",
     "vite-tsconfig-paths": "^5.1.4",
