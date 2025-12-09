@@ -19,7 +19,7 @@
     "@hookform/resolvers": "^5.2.2",
     "axios": "^1.13.2",
     "classnames": "^2.5.1",
-    "i18next": "^25.7.1",
+    "i18next": "^25.7.2",
     "jotai": "^2.15.2",
     "react": "^19.1.0",
     "react-dom": "^19.2.1",
