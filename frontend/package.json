@@ -20,7 +20,7 @@
     "axios": "^1.13.2",
     "classnames": "^2.5.1",
     "i18next": "^25.7.3",
-    "jotai": "^2.16.0",
+    "jotai": "^2.16.1",
     "react": "^19.1.0",
     "react-dom": "^19.2.3",
     "react-hook-form": "^7.69.0",
