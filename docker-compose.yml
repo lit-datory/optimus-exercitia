@@ -37,5 +37,22 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
 
+  mails:
+    container_name: ${APP_NAME}_mails
+    build:
+      context: mails
+      dockerfile: Dockerfile
+    ports:
+      - ${MAILS_PORT}:3000
+    volumes:
+      - ./mails:/mails
+
+  mailpit:
+    container_name: ${APP_NAME}_mailpit
+    image: axllent/mailpit
+    ports:
+      - ${MAILPIT_PORT}:8025
+      - ${MAILPIT_SMTP_PORT}:1025
+
 volumes:
   postgres:
